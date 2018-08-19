@@ -7,10 +7,14 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <string.h>
+<<<<<<< HEAD
 
 #if (defined(__x86_64__) || defined(__i386__)) && defined(__GNUC__)
 #include <cpuid.h>
 #endif
+=======
+#include "util/logging.h"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 namespace leveldb {
 namespace port {
@@ -53,6 +57,7 @@ void InitOnce(OnceType* once, void (*initializer)()) {
   PthreadCall("once", pthread_once(once, initializer));
 }
 
+<<<<<<< HEAD
 bool HasAcceleratedCRC32C() {
 #if (defined(__x86_64__) || defined(__i386__)) && defined(__GNUC__)
   unsigned int eax, ebx, ecx, edx;
@@ -63,5 +68,7 @@ bool HasAcceleratedCRC32C() {
 #endif
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }  // namespace port
 }  // namespace leveldb

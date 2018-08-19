@@ -5,7 +5,10 @@
 #ifndef STORAGE_LEVELDB_DB_WRITE_BATCH_INTERNAL_H_
 #define STORAGE_LEVELDB_DB_WRITE_BATCH_INTERNAL_H_
 
+<<<<<<< HEAD
 #include "db/dbformat.h"
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #include "leveldb/write_batch.h"
 
 namespace leveldb {
@@ -22,10 +25,17 @@ class WriteBatchInternal {
   // Set the count for the number of entries in the batch.
   static void SetCount(WriteBatch* batch, int n);
 
+<<<<<<< HEAD
   // Return the sequence number for the start of this batch.
   static SequenceNumber Sequence(const WriteBatch* batch);
 
   // Store the specified number as the sequence number for the start of
+=======
+  // Return the seqeunce number for the start of this batch.
+  static SequenceNumber Sequence(const WriteBatch* batch);
+
+  // Store the specified number as the seqeunce number for the start of
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // this batch.
   static void SetSequence(WriteBatch* batch, SequenceNumber seq);
 

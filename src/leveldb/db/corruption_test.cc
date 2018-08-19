@@ -36,7 +36,11 @@ class CorruptionTest {
     tiny_cache_ = NewLRUCache(100);
     options_.env = &env_;
     options_.block_cache = tiny_cache_;
+<<<<<<< HEAD
     dbname_ = test::TmpDir() + "/corruption_test";
+=======
+    dbname_ = test::TmpDir() + "/db_test";
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     DestroyDB(dbname_, options_);
 
     db_ = NULL;
@@ -75,6 +79,7 @@ class CorruptionTest {
       Slice key = Key(i, &key_space);
       batch.Clear();
       batch.Put(key, Value(i, &value_space));
+<<<<<<< HEAD
       WriteOptions options;
       // Corrupt() doesn't work without this sync on windows; stat reports 0 for
       // the file size.
@@ -82,6 +87,9 @@ class CorruptionTest {
         options.sync = true;
       }
       ASSERT_OK(db_->Write(options, &batch));
+=======
+      ASSERT_OK(db_->Write(WriteOptions(), &batch));
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     }
   }
 
@@ -131,7 +139,11 @@ class CorruptionTest {
     FileType type;
     std::string fname;
     int picked_number = -1;
+<<<<<<< HEAD
     for (size_t i = 0; i < filenames.size(); i++) {
+=======
+    for (int i = 0; i < filenames.size(); i++) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       if (ParseFileName(filenames[i], &number, &type) &&
           type == filetype &&
           int(number) > picked_number) {  // Pick latest file
@@ -244,6 +256,7 @@ TEST(CorruptionTest, TableFile) {
   Check(90, 99);
 }
 
+<<<<<<< HEAD
 TEST(CorruptionTest, TableFileRepair) {
   options_.block_size = 2 * kValueSize;  // Limit scope of corruption
   options_.paranoid_checks = true;
@@ -260,6 +273,8 @@ TEST(CorruptionTest, TableFileRepair) {
   Check(95, 99);
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 TEST(CorruptionTest, TableFileIndexData) {
   Build(10000);  // Enough to build multiple Tables
   DBImpl* dbi = reinterpret_cast<DBImpl*>(db_);

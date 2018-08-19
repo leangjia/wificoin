@@ -1,17 +1,27 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef WIFICOIN_QT_ADDRESSTABLEMODEL_H
 #define WIFICOIN_QT_ADDRESSTABLEMODEL_H
+=======
+#ifndef ADDRESSTABLEMODEL_H
+#define ADDRESSTABLEMODEL_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 #include <QAbstractTableModel>
 #include <QStringList>
 
 class AddressTablePriv;
+<<<<<<< HEAD
 class WalletModel;
 
 class CWallet;
+=======
+class CWallet;
+class WalletModel;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 /**
    Qt model of the address book in the core. This allows views to access and modify the address book.
@@ -26,7 +36,11 @@ public:
 
     enum ColumnIndex {
         Label = 0,   /**< User specified label */
+<<<<<<< HEAD
         Address = 1  /**< WiFicoin address */
+=======
+        Address = 1  /**< Bitcoin address */
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     };
 
     enum RoleIndex {
@@ -84,12 +98,26 @@ private:
     /** Notify listeners that data changed. */
     void emitDataChanged(int index);
 
+<<<<<<< HEAD
 public Q_SLOTS:
     /* Update address list from core.
      */
     void updateEntry(const QString &address, const QString &label, bool isMine, const QString &purpose, int status);
+=======
+signals:
+    void defaultAddressChanged(const QString &address);
+
+public slots:
+    /* Update address list from core.
+     */
+    void updateEntry(const QString &address, const QString &label, bool isMine, int status);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     friend class AddressTablePriv;
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_ADDRESSTABLEMODEL_H
+=======
+#endif // ADDRESSTABLEMODEL_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

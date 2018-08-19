@@ -59,11 +59,14 @@ class CacheTest {
                                    &CacheTest::Deleter));
   }
 
+<<<<<<< HEAD
   Cache::Handle* InsertAndReturnHandle(int key, int value, int charge = 1) {
     return cache_->Insert(EncodeKey(key), EncodeValue(value), charge,
                           &CacheTest::Deleter);
   }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   void Erase(int key) {
     cache_->Erase(EncodeKey(key));
   }
@@ -140,11 +143,16 @@ TEST(CacheTest, EntriesArePinned) {
 TEST(CacheTest, EvictionPolicy) {
   Insert(100, 101);
   Insert(200, 201);
+<<<<<<< HEAD
   Insert(300, 301);
   Cache::Handle* h = cache_->Lookup(EncodeKey(300));
 
   // Frequently used entry must be kept around,
   // as must things that are still in use.
+=======
+
+  // Frequently used entry must be kept around
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   for (int i = 0; i < kCacheSize + 100; i++) {
     Insert(1000+i, 2000+i);
     ASSERT_EQ(2000+i, Lookup(1000+i));
@@ -152,6 +160,7 @@ TEST(CacheTest, EvictionPolicy) {
   }
   ASSERT_EQ(101, Lookup(100));
   ASSERT_EQ(-1, Lookup(200));
+<<<<<<< HEAD
   ASSERT_EQ(301, Lookup(300));
   cache_->Release(h);
 }
@@ -171,6 +180,8 @@ TEST(CacheTest, UseExceedsCacheSize) {
   for (int i = 0; i < h.size(); i++) {
     cache_->Release(h[i]);
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 TEST(CacheTest, HeavyEntries) {
@@ -206,6 +217,7 @@ TEST(CacheTest, NewId) {
   ASSERT_NE(a, b);
 }
 
+<<<<<<< HEAD
 TEST(CacheTest, Prune) {
   Insert(1, 100);
   Insert(2, 200);
@@ -219,6 +231,8 @@ TEST(CacheTest, Prune) {
   ASSERT_EQ(-1, Lookup(2));
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }  // namespace leveldb
 
 int main(int argc, char** argv) {

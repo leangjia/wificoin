@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -14,10 +15,22 @@
 #include <math.h>
 #include <stdlib.h>
 
+=======
+// Copyright (c) 2012 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <math.h>
+#include <stdlib.h>
+
+#include "bloom.h"
+#include "main.h"
+#include "script.h"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 #define LN2SQUARED 0.4804530139182014246671025263266649717305529515945455
 #define LN2 0.6931471805599453094172321214581765680755001343602552
 
+<<<<<<< HEAD
 CBloomFilter::CBloomFilter(const unsigned int nElements, const double nFPRate, const unsigned int nTweakIn, unsigned char nFlagsIn) :
     /**
      * The ideal size for a bloom filter with a given number of elements and false positive rate is:
@@ -46,6 +59,25 @@ CBloomFilter::CBloomFilter(const unsigned int nElements, const double nFPRate, c
     nHashFuncs((unsigned int)(vData.size() * 8 / nElements * LN2)),
     nTweak(nTweakIn),
     nFlags(BLOOM_UPDATE_NONE)
+=======
+using namespace std;
+
+static const unsigned char bit_mask[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+
+CBloomFilter::CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweakIn, unsigned char nFlagsIn) :
+// The ideal size for a bloom filter with a given number of elements and false positive rate is:
+// - nElements * log(fp rate) / ln(2)^2
+// We ignore filter parameters which will create a bloom filter larger than the protocol limits
+vData(min((unsigned int)(-1  / LN2SQUARED * nElements * log(nFPRate)), MAX_BLOOM_FILTER_SIZE * 8) / 8),
+// The ideal number of hash functions is filter size * ln(2) / number of elements
+// Again, we ignore filter parameters which will create a bloom filter with more hash functions than the protocol limits
+// See http://en.wikipedia.org/wiki/Bloom_filter for an explanation of these formulas
+isFull(false),
+isEmpty(false),
+nHashFuncs(min((unsigned int)(vData.size() * 8 / nElements * LN2), MAX_HASH_FUNCS)),
+nTweak(nTweakIn),
+nFlags(nFlagsIn)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
 }
 
@@ -55,7 +87,11 @@ inline unsigned int CBloomFilter::Hash(unsigned int nHashNum, const std::vector<
     return MurmurHash3(nHashNum * 0xFBA4C795 + nTweak, vDataToHash) % (vData.size() * 8);
 }
 
+<<<<<<< HEAD
 void CBloomFilter::insert(const std::vector<unsigned char>& vKey)
+=======
+void CBloomFilter::insert(const vector<unsigned char>& vKey)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     if (isFull)
         return;
@@ -63,7 +99,11 @@ void CBloomFilter::insert(const std::vector<unsigned char>& vKey)
     {
         unsigned int nIndex = Hash(i, vKey);
         // Sets bit nIndex of vData
+<<<<<<< HEAD
         vData[nIndex >> 3] |= (1 << (7 & nIndex));
+=======
+        vData[nIndex >> 3] |= bit_mask[7 & nIndex];
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     }
     isEmpty = false;
 }
@@ -72,17 +112,29 @@ void CBloomFilter::insert(const COutPoint& outpoint)
 {
     CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
     stream << outpoint;
+<<<<<<< HEAD
     std::vector<unsigned char> data(stream.begin(), stream.end());
+=======
+    vector<unsigned char> data(stream.begin(), stream.end());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     insert(data);
 }
 
 void CBloomFilter::insert(const uint256& hash)
 {
+<<<<<<< HEAD
     std::vector<unsigned char> data(hash.begin(), hash.end());
     insert(data);
 }
 
 bool CBloomFilter::contains(const std::vector<unsigned char>& vKey) const
+=======
+    vector<unsigned char> data(hash.begin(), hash.end());
+    insert(data);
+}
+
+bool CBloomFilter::contains(const vector<unsigned char>& vKey) const
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     if (isFull)
         return true;
@@ -92,7 +144,11 @@ bool CBloomFilter::contains(const std::vector<unsigned char>& vKey) const
     {
         unsigned int nIndex = Hash(i, vKey);
         // Checks bit nIndex of vData
+<<<<<<< HEAD
         if (!(vData[nIndex >> 3] & (1 << (7 & nIndex))))
+=======
+        if (!(vData[nIndex >> 3] & bit_mask[7 & nIndex]))
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
             return false;
     }
     return true;
@@ -102,12 +158,17 @@ bool CBloomFilter::contains(const COutPoint& outpoint) const
 {
     CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
     stream << outpoint;
+<<<<<<< HEAD
     std::vector<unsigned char> data(stream.begin(), stream.end());
+=======
+    vector<unsigned char> data(stream.begin(), stream.end());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     return contains(data);
 }
 
 bool CBloomFilter::contains(const uint256& hash) const
 {
+<<<<<<< HEAD
     std::vector<unsigned char> data(hash.begin(), hash.end());
     return contains(data);
 }
@@ -125,12 +186,22 @@ void CBloomFilter::reset(const unsigned int nNewTweak)
     nTweak = nNewTweak;
 }
 
+=======
+    vector<unsigned char> data(hash.begin(), hash.end());
+    return contains(data);
+}
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 bool CBloomFilter::IsWithinSizeConstraints() const
 {
     return vData.size() <= MAX_BLOOM_FILTER_SIZE && nHashFuncs <= MAX_HASH_FUNCS;
 }
 
+<<<<<<< HEAD
 bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
+=======
+bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx, const uint256& hash)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     bool fFound = false;
     // Match if the filter contains the hash of tx
@@ -139,7 +210,10 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
         return true;
     if (isEmpty)
         return false;
+<<<<<<< HEAD
     const uint256& hash = tx.GetHash();
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (contains(hash))
         fFound = true;
 
@@ -148,10 +222,17 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
         const CTxOut& txout = tx.vout[i];
         // Match if the filter contains any arbitrary script data element in any scriptPubKey in tx
         // If this matches, also add the specific output that was matched.
+<<<<<<< HEAD
         // This means clients don't have to update the filter themselves when a new relevant tx 
         // is discovered in order to find spending transactions, which avoids round-tripping and race conditions.
         CScript::const_iterator pc = txout.scriptPubKey.begin();
         std::vector<unsigned char> data;
+=======
+        // This means clients don't have to update the filter themselves when a new relevant tx
+        // is discovered in order to find spending transactions, which avoids round-tripping and race conditions.
+        CScript::const_iterator pc = txout.scriptPubKey.begin();
+        vector<unsigned char> data;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         while (pc < txout.scriptPubKey.end())
         {
             opcodetype opcode;
@@ -165,7 +246,11 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
                 else if ((nFlags & BLOOM_UPDATE_MASK) == BLOOM_UPDATE_P2PUBKEY_ONLY)
                 {
                     txnouttype type;
+<<<<<<< HEAD
                     std::vector<std::vector<unsigned char> > vSolutions;
+=======
+                    vector<vector<unsigned char> > vSolutions;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
                     if (Solver(txout.scriptPubKey, type, vSolutions) &&
                             (type == TX_PUBKEY || type == TX_MULTISIG))
                         insert(COutPoint(hash, i));
@@ -178,7 +263,11 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
     if (fFound)
         return true;
 
+<<<<<<< HEAD
     for (const CTxIn& txin : tx.vin)
+=======
+    BOOST_FOREACH(const CTxIn& txin, tx.vin)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     {
         // Match if the filter contains an outpoint tx spends
         if (contains(txin.prevout))
@@ -186,7 +275,11 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
 
         // Match if the filter contains any arbitrary script data element in any scriptSig in tx
         CScript::const_iterator pc = txin.scriptSig.begin();
+<<<<<<< HEAD
         std::vector<unsigned char> data;
+=======
+        vector<unsigned char> data;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         while (pc < txin.scriptSig.end())
         {
             opcodetype opcode;
@@ -212,6 +305,7 @@ void CBloomFilter::UpdateEmptyFull()
     isFull = full;
     isEmpty = empty;
 }
+<<<<<<< HEAD
 
 CRollingBloomFilter::CRollingBloomFilter(const unsigned int nElements, const double fpRate)
 {
@@ -310,3 +404,5 @@ void CRollingBloomFilter::reset()
         *it = 0;
     }
 }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

@@ -8,8 +8,11 @@
 #include "util/crc32c.h"
 
 #include <stdint.h>
+<<<<<<< HEAD
 
 #include "port/port.h"
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #include "util/coding.h"
 
 namespace leveldb {
@@ -285,6 +288,7 @@ static inline uint32_t LE_LOAD32(const uint8_t *p) {
   return DecodeFixed32(reinterpret_cast<const char*>(p));
 }
 
+<<<<<<< HEAD
 // Determine if the CPU running this program can accelerate the CRC32C
 // calculation.
 static bool CanAccelerateCRC32C() {
@@ -306,6 +310,9 @@ uint32_t Extend(uint32_t crc, const char* buf, size_t size) {
     return port::AcceleratedCRC32C(crc, buf, size);
   }
 
+=======
+uint32_t Extend(uint32_t crc, const char* buf, size_t size) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   const uint8_t *p = reinterpret_cast<const uint8_t *>(buf);
   const uint8_t *e = p + size;
   uint32_t l = crc ^ 0xffffffffu;

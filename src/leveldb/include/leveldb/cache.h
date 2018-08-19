@@ -81,6 +81,7 @@ class Cache {
   // its cache keys.
   virtual uint64_t NewId() = 0;
 
+<<<<<<< HEAD
   // Remove all cache entries that are not actively in use.  Memory-constrained
   // applications may wish to call this method to reduce memory usage.
   // Default implementation of Prune() does nothing.  Subclasses are strongly
@@ -92,6 +93,8 @@ class Cache {
   // cache.
   virtual size_t TotalCharge() const = 0;
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  private:
   void LRU_Remove(Handle* e);
   void LRU_Append(Handle* e);
@@ -107,4 +110,8 @@ class Cache {
 
 }  // namespace leveldb
 
+<<<<<<< HEAD
 #endif  // STORAGE_LEVELDB_INCLUDE_CACHE_H_
+=======
+#endif  // STORAGE_LEVELDB_UTIL_CACHE_H_
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

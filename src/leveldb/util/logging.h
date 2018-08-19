@@ -32,6 +32,13 @@ extern std::string NumberToString(uint64_t num);
 // Escapes any non-printable characters found in "value".
 extern std::string EscapeString(const Slice& value);
 
+<<<<<<< HEAD
+=======
+// If *in starts with "c", advances *in past the first character and
+// returns true.  Otherwise, returns false.
+extern bool ConsumeChar(Slice* in, char c);
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // Parse a human-readable number from "*in" into *value.  On success,
 // advances "*in" past the consumed number and sets "*val" to the
 // numeric value.  Otherwise, returns false and leaves *in in an

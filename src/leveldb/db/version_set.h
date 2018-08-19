@@ -179,7 +179,11 @@ class VersionSet {
       EXCLUSIVE_LOCKS_REQUIRED(mu);
 
   // Recover the last saved descriptor from persistent storage.
+<<<<<<< HEAD
   Status Recover(bool *save_manifest);
+=======
+  Status Recover();
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   // Return the current version.
   Version* current() const { return current_; }
@@ -274,8 +278,11 @@ class VersionSet {
   friend class Compaction;
   friend class Version;
 
+<<<<<<< HEAD
   bool ReuseManifest(const std::string& dscname, const std::string& dscbase);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   void Finalize(Version* v);
 
   void GetRange(const std::vector<FileMetaData*>& inputs,
@@ -294,6 +301,11 @@ class VersionSet {
 
   void AppendVersion(Version* v);
 
+<<<<<<< HEAD
+=======
+  bool ManifestContains(const std::string& record) const;
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   Env* const env_;
   const std::string dbname_;
   const Options* const options_;
@@ -366,7 +378,11 @@ class Compaction {
   friend class Version;
   friend class VersionSet;
 
+<<<<<<< HEAD
   Compaction(const Options* options, int level);
+=======
+  explicit Compaction(int level);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   int level_;
   uint64_t max_output_file_size_;
@@ -376,7 +392,11 @@ class Compaction {
   // Each compaction reads inputs from "level_" and "level_+1"
   std::vector<FileMetaData*> inputs_[2];      // The two sets of inputs
 
+<<<<<<< HEAD
   // State used to check for number of overlapping grandparent files
+=======
+  // State used to check for number of of overlapping grandparent files
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // (parent == level_ + 1, grandparent == level_ + 2)
   std::vector<FileMetaData*> grandparents_;
   size_t grandparent_index_;  // Index in grandparent_starts_

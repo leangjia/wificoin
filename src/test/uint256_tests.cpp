@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -264,6 +265,23 @@ BOOST_AUTO_TEST_CASE( conversion )
     BOOST_CHECK(arith_uint256(R2L.GetHex()) == UintToArith256(R2L));
     BOOST_CHECK(R1L.GetHex() == UintToArith256(R1L).GetHex());
     BOOST_CHECK(R2L.GetHex() == UintToArith256(R2L).GetHex());
+=======
+#include <boost/test/unit_test.hpp>
+
+#include "uint256.h"
+
+BOOST_AUTO_TEST_SUITE(uint256_tests)
+
+BOOST_AUTO_TEST_CASE(uint256_equality)
+{
+    uint256 num1 = 10;
+    uint256 num2 = 11;
+    BOOST_CHECK(num1+1 == num2);
+
+    uint64 num3 = 10;
+    BOOST_CHECK(num1 == num3);
+    BOOST_CHECK(num1+num2 == num3+num2);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 BOOST_AUTO_TEST_SUITE_END()

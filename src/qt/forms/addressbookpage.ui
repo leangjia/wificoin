@@ -10,6 +10,12 @@
     <height>380</height>
    </rect>
   </property>
+<<<<<<< HEAD
+=======
+  <property name="windowTitle">
+   <string>Address Book</string>
+  </property>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="labelExplanation">
@@ -27,7 +33,11 @@
       <enum>Qt::CustomContextMenu</enum>
      </property>
      <property name="toolTip">
+<<<<<<< HEAD
       <string>Right-click to edit address or label</string>
+=======
+      <string>Double-click to edit address or label</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      </property>
      <property name="tabKeyNavigation">
       <bool>false</bool>
@@ -57,6 +67,7 @@
         <string>Create a new address</string>
        </property>
        <property name="text">
+<<<<<<< HEAD
         <string>&amp;New</string>
        </property>
        <property name="icon">
@@ -66,6 +77,14 @@
        <property name="autoDefault">
         <bool>false</bool>
        </property>
+=======
+        <string>&amp;New Address</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+       </property>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       </widget>
      </item>
      <item>
@@ -74,6 +93,7 @@
         <string>Copy the currently selected address to the system clipboard</string>
        </property>
        <property name="text">
+<<<<<<< HEAD
         <string>&amp;Copy</string>
        </property>
        <property name="icon">
@@ -82,6 +102,52 @@
        </property>
        <property name="autoDefault">
         <bool>false</bool>
+=======
+        <string>&amp;Copy Address</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/editcopy</normaloff>:/icons/editcopy</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="showQRCode">
+       <property name="text">
+        <string>Show &amp;QR Code</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/qrcode</normaloff>:/icons/qrcode</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="signMessage">
+       <property name="toolTip">
+        <string>Sign a message to prove you own a rainbowcoin address</string>
+       </property>
+       <property name="text">
+        <string>Sign &amp;Message</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="verifyMessage">
+       <property name="toolTip">
+        <string>Verify a message to ensure it was signed with a specified rainbowcoin address</string>
+       </property>
+       <property name="text">
+        <string>&amp;Verify Message</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/transaction_0</normaloff>:/icons/transaction_0</iconset>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
       </widget>
      </item>
@@ -94,12 +160,18 @@
         <string>&amp;Delete</string>
        </property>
        <property name="icon">
+<<<<<<< HEAD
         <iconset resource="../wificoin.qrc">
          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
+=======
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+       </property>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       </widget>
      </item>
      <item>
@@ -124,6 +196,7 @@
         <string>&amp;Export</string>
        </property>
        <property name="icon">
+<<<<<<< HEAD
         <iconset resource="../wificoin.qrc">
          <normaloff>:/icons/export</normaloff>:/icons/export</iconset>
        </property>
@@ -136,15 +209,31 @@
       <widget class="QPushButton" name="closeButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+=======
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/export</normaloff>:/icons/export</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+<<<<<<< HEAD
        <property name="text">
         <string>C&amp;lose</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
+=======
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Ok</set>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
       </widget>
      </item>
@@ -153,7 +242,11 @@
   </layout>
  </widget>
  <resources>
+<<<<<<< HEAD
   <include location="../wificoin.qrc"/>
+=======
+  <include location="../bitcoin.qrc"/>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  </resources>
  <connections/>
 </ui>

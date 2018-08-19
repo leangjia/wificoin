@@ -32,7 +32,11 @@ std::string RandomKey(Random* rnd, int len) {
 
 
 extern Slice CompressibleString(Random* rnd, double compressed_fraction,
+<<<<<<< HEAD
                                 size_t len, std::string* dst) {
+=======
+                                int len, std::string* dst) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   int raw = static_cast<int>(len * compressed_fraction);
   if (raw < 1) raw = 1;
   std::string raw_data;

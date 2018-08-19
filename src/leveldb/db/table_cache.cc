@@ -54,12 +54,15 @@ Status TableCache::FindTable(uint64_t file_number, uint64_t file_size,
     RandomAccessFile* file = NULL;
     Table* table = NULL;
     s = env_->NewRandomAccessFile(fname, &file);
+<<<<<<< HEAD
     if (!s.ok()) {
       std::string old_fname = SSTTableFileName(dbname_, file_number);
       if (env_->NewRandomAccessFile(old_fname, &file).ok()) {
         s = Status::OK();
       }
     }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (s.ok()) {
       s = Table::Open(*options_, file, file_size, &table);
     }

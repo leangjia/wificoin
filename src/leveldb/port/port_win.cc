@@ -32,7 +32,10 @@
 
 #include <windows.h>
 #include <cassert>
+<<<<<<< HEAD
 #include <intrin.h>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 namespace leveldb {
 namespace port {
@@ -144,6 +147,7 @@ void AtomicPointer::NoBarrier_Store(void* v) {
   rep_ = v;
 }
 
+<<<<<<< HEAD
 bool HasAcceleratedCRC32C() {
 #if defined(__x86_64__) || defined(__i386__)
   int cpu_info[4];
@@ -154,5 +158,7 @@ bool HasAcceleratedCRC32C() {
 #endif
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 }

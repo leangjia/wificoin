@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef WIFICOIN_QT_GUICONSTANTS_H
 #define WIFICOIN_QT_GUICONSTANTS_H
+=======
+#ifndef GUICONSTANTS_H
+#define GUICONSTANTS_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 250;
@@ -11,11 +16,17 @@ static const int MODEL_UPDATE_DELAY = 250;
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
+<<<<<<< HEAD
 /* WiFicoinGUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
 static const bool DEFAULT_SPLASHSCREEN = true;
 
+=======
+/* BitcoinGUI -- Size of icons in status bar */
+static const int STATUSBAR_ICONSIZE = 16;
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 /* Invalid field background style */
 #define STYLE_INVALID "background:#FF8080"
 
@@ -25,6 +36,7 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define COLOR_NEGATIVE QColor(255, 0, 0)
 /* Transaction list -- bare address (without label) */
 #define COLOR_BAREADDRESS QColor(140, 140, 140)
+<<<<<<< HEAD
 /* Transaction list -- TX status decoration - open until date */
 #define COLOR_TX_STATUS_OPENUNTILDATE QColor(64, 64, 255)
 /* Transaction list -- TX status decoration - offline */
@@ -33,6 +45,8 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define COLOR_TX_STATUS_DANGER QColor(200, 100, 100)
 /* Transaction list -- TX status decoration - default color */
 #define COLOR_BLACK QColor(0, 0, 0)
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 /* Tooltips longer than this (in characters) are converted into rich text,
    so that they can be word-wrapped.
@@ -43,6 +57,7 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 static const int MAX_URI_LENGTH = 255;
 
 /* QRCodeDialog -- size of exported QR Code image */
+<<<<<<< HEAD
 #define QR_IMAGE_SIZE 300
 
 /* Number of frames in spinner animation */
@@ -54,3 +69,8 @@ static const int MAX_URI_LENGTH = 255;
 #define QAPP_APP_NAME_TESTNET "WiFicoin-Qt-testnet"
 
 #endif // WIFICOIN_QT_GUICONSTANTS_H
+=======
+#define EXPORT_IMAGE_SIZE 256
+
+#endif // GUICONSTANTS_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

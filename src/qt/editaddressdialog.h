@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -12,6 +13,17 @@ class AddressTableModel;
 namespace Ui {
     class EditAddressDialog;
 }
+=======
+#ifndef EDITADDRESSDIALOG_H
+#define EDITADDRESSDIALOG_H
+
+#include <QDialog>
+
+namespace Ui {
+    class EditAddressDialog;
+}
+class AddressTableModel;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 QT_BEGIN_NAMESPACE
 class QDataWidgetMapper;
@@ -31,7 +43,11 @@ public:
         EditSendingAddress
     };
 
+<<<<<<< HEAD
     explicit EditAddressDialog(Mode mode, QWidget *parent);
+=======
+    explicit EditAddressDialog(Mode mode, QWidget *parent = 0);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     ~EditAddressDialog();
 
     void setModel(AddressTableModel *model);
@@ -40,7 +56,11 @@ public:
     QString getAddress() const;
     void setAddress(const QString &address);
 
+<<<<<<< HEAD
 public Q_SLOTS:
+=======
+public slots:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     void accept();
 
 private:
@@ -54,4 +74,8 @@ private:
     QString address;
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_EDITADDRESSDIALOG_H
+=======
+#endif // EDITADDRESSDIALOG_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

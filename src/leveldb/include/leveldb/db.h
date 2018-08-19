@@ -14,7 +14,11 @@ namespace leveldb {
 
 // Update Makefile if you change these
 static const int kMajorVersion = 1;
+<<<<<<< HEAD
 static const int kMinorVersion = 20;
+=======
+static const int kMinorVersion = 13;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 struct Options;
 struct ReadOptions;
@@ -115,8 +119,11 @@ class DB {
   //     about the internal operation of the DB.
   //  "leveldb.sstables" - returns a multi-line string that describes all
   //     of the sstables that make up the db contents.
+<<<<<<< HEAD
   //  "leveldb.approximate-memory-usage" - returns the approximate number of
   //     bytes of memory in use by the DB.
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   virtual bool GetProperty(const Slice& property, std::string* value) = 0;
 
   // For each i in [0,n-1], store in "sizes[i]", the approximate

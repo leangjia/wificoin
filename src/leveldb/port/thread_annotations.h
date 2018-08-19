@@ -2,8 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
+<<<<<<< HEAD
 #ifndef STORAGE_LEVELDB_PORT_THREAD_ANNOTATIONS_H_
 #define STORAGE_LEVELDB_PORT_THREAD_ANNOTATIONS_H_
+=======
+#ifndef STORAGE_LEVELDB_PORT_THREAD_ANNOTATIONS_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 // Some environments provide custom macros to aid in static thread-safety
 // analysis.  Provide empty definitions of such macros unless they are already
@@ -57,4 +61,8 @@
 #define NO_THREAD_SAFETY_ANALYSIS
 #endif
 
+<<<<<<< HEAD
 #endif  // STORAGE_LEVELDB_PORT_THREAD_ANNOTATIONS_H_
+=======
+#endif  // STORAGE_LEVELDB_PORT_THREAD_ANNOTATIONS_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

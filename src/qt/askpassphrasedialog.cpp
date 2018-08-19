@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -6,12 +7,15 @@
 #include "config/wificoin-config.h"
 #endif
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #include "askpassphrasedialog.h"
 #include "ui_askpassphrasedialog.h"
 
 #include "guiconstants.h"
 #include "walletmodel.h"
 
+<<<<<<< HEAD
 #include "support/allocators/secure.h"
 
 #include <QKeyEvent>
@@ -22,15 +26,28 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AskPassphraseDialog),
     mode(_mode),
+=======
+#include <QMessageBox>
+#include <QPushButton>
+#include <QKeyEvent>
+
+AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AskPassphraseDialog),
+    mode(mode),
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     model(0),
     fCapsLock(false)
 {
     ui->setupUi(this);
+<<<<<<< HEAD
 
     ui->passEdit1->setMinimumSize(ui->passEdit1->sizeHint());
     ui->passEdit2->setMinimumSize(ui->passEdit2->sizeHint());
     ui->passEdit3->setMinimumSize(ui->passEdit3->sizeHint());
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     ui->passEdit1->setMaxLength(MAX_PASSPHRASE_SIZE);
     ui->passEdit2->setMaxLength(MAX_PASSPHRASE_SIZE);
     ui->passEdit3->setMaxLength(MAX_PASSPHRASE_SIZE);
@@ -43,9 +60,15 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
     switch(mode)
     {
         case Encrypt: // Ask passphrase x2
+<<<<<<< HEAD
             ui->warningLabel->setText(tr("Enter the new passphrase to the wallet.<br/>Please use a passphrase of <b>ten or more random characters</b>, or <b>eight or more words</b>."));
             ui->passLabel1->hide();
             ui->passEdit1->hide();
+=======
+            ui->passLabel1->hide();
+            ui->passEdit1->hide();
+            ui->warningLabel->setText(tr("Enter the new passphrase to the wallet.<br/>Please use a passphrase of <b>10 or more random characters</b>, or <b>eight or more words</b>."));
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
             setWindowTitle(tr("Encrypt wallet"));
             break;
         case Unlock: // Ask passphrase
@@ -66,9 +89,16 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
             break;
         case ChangePass: // Ask old passphrase + new passphrase x2
             setWindowTitle(tr("Change passphrase"));
+<<<<<<< HEAD
             ui->warningLabel->setText(tr("Enter the old passphrase and new passphrase to the wallet."));
             break;
     }
+=======
+            ui->warningLabel->setText(tr("Enter the old and new passphrase to the wallet."));
+            break;
+    }
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     textChanged();
     connect(ui->passEdit1, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
     connect(ui->passEdit2, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
@@ -77,6 +107,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent) :
 
 AskPassphraseDialog::~AskPassphraseDialog()
 {
+<<<<<<< HEAD
     secureClearPassFields();
     delete ui;
 }
@@ -84,6 +115,18 @@ AskPassphraseDialog::~AskPassphraseDialog()
 void AskPassphraseDialog::setModel(WalletModel *_model)
 {
     this->model = _model;
+=======
+    // Attempt to overwrite text so that they do not linger around in memory
+    ui->passEdit1->setText(QString(" ").repeated(ui->passEdit1->text().size()));
+    ui->passEdit2->setText(QString(" ").repeated(ui->passEdit2->text().size()));
+    ui->passEdit3->setText(QString(" ").repeated(ui->passEdit3->text().size()));
+    delete ui;
+}
+
+void AskPassphraseDialog::setModel(WalletModel *model)
+{
+    this->model = model;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 void AskPassphraseDialog::accept()
@@ -100,8 +143,11 @@ void AskPassphraseDialog::accept()
     newpass1.assign(ui->passEdit2->text().toStdString().c_str());
     newpass2.assign(ui->passEdit3->text().toStdString().c_str());
 
+<<<<<<< HEAD
     secureClearPassFields();
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     switch(mode)
     {
     case Encrypt: {
@@ -111,7 +157,11 @@ void AskPassphraseDialog::accept()
             break;
         }
         QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm wallet encryption"),
+<<<<<<< HEAD
                  tr("Warning: If you encrypt your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR WIFICOINS</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
+=======
+                 tr("Warning: If you encrypt your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR BITCOINS</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
                  QMessageBox::Yes|QMessageBox::Cancel,
                  QMessageBox::Cancel);
         if(retval == QMessageBox::Yes)
@@ -122,9 +172,15 @@ void AskPassphraseDialog::accept()
                 {
                     QMessageBox::warning(this, tr("Wallet encrypted"),
                                          "<qt>" +
+<<<<<<< HEAD
                                          tr("%1 will close now to finish the encryption process. "
                                          "Remember that encrypting your wallet cannot fully protect "
                                          "your wificoins from being stolen by malware infecting your computer.").arg(tr(PACKAGE_NAME)) +
+=======
+                                         tr("Bitcoin will close now to finish the encryption process. "
+                                         "Remember that encrypting your wallet cannot fully protect "
+                                         "your bitcoins from being stolen by malware infecting your computer.") +
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
                                          "<br><br><b>" +
                                          tr("IMPORTANT: Any previous backups you have made of your wallet file "
                                          "should be replaced with the newly generated, encrypted wallet file. "
@@ -259,6 +315,7 @@ bool AskPassphraseDialog::eventFilter(QObject *object, QEvent *event)
     }
     return QDialog::eventFilter(object, event);
 }
+<<<<<<< HEAD
 
 static void SecureClearQLineEdit(QLineEdit* edit)
 {
@@ -273,3 +330,5 @@ void AskPassphraseDialog::secureClearPassFields()
     SecureClearQLineEdit(ui->passEdit2);
     SecureClearQLineEdit(ui->passEdit3);
 }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

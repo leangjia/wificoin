@@ -38,7 +38,11 @@ int RunAllTests() {
 
   int num = 0;
   if (tests != NULL) {
+<<<<<<< HEAD
     for (size_t i = 0; i < tests->size(); i++) {
+=======
+    for (int i = 0; i < tests->size(); i++) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       const Test& t = (*tests)[i];
       if (matcher != NULL) {
         std::string name = t.base;

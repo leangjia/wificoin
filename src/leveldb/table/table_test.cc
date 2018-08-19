@@ -797,6 +797,7 @@ static bool Between(uint64_t val, uint64_t low, uint64_t high) {
 
 class TableTest { };
 
+<<<<<<< HEAD
 TEST(TableTest, ApproximateOffsetOfPlain) {
   TableConstructor c(BytewiseComparator());
   c.Add("k01", "hello");
@@ -826,6 +827,8 @@ TEST(TableTest, ApproximateOffsetOfPlain) {
   ASSERT_TRUE(Between(c.ApproximateOffsetOf("xyz"),  610000, 612000));
 
 }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 static bool SnappyCompressionSupported() {
   std::string out;
@@ -853,6 +856,7 @@ TEST(TableTest, ApproximateOffsetOfCompressed) {
   options.compression = kSnappyCompression;
   c.Finish(options, &keys, &kvmap);
 
+<<<<<<< HEAD
   // Expected upper and lower bounds of space used by compressible strings.
   static const int kSlop = 1000;  // Compressor effectiveness varies.
   const int expected = 2500;  // 10000 * compression ratio (0.25)
@@ -867,6 +871,14 @@ TEST(TableTest, ApproximateOffsetOfCompressed) {
   ASSERT_TRUE(Between(c.ApproximateOffsetOf("k04"), min_z, max_z));
   // Have now emitted two large compressible strings, so adjust expected offset.
   ASSERT_TRUE(Between(c.ApproximateOffsetOf("xyz"), 2 * min_z, 2 * max_z));
+=======
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("abc"),       0,      0));
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("k01"),       0,      0));
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("k02"),       0,      0));
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("k03"),    2000,   3000));
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("k04"),    2000,   3000));
+  ASSERT_TRUE(Between(c.ApproximateOffsetOf("xyz"),    4000,   6000));
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 }  // namespace leveldb

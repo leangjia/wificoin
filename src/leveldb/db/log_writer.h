@@ -22,12 +22,15 @@ class Writer {
   // "*dest" must be initially empty.
   // "*dest" must remain live while this Writer is in use.
   explicit Writer(WritableFile* dest);
+<<<<<<< HEAD
 
   // Create a writer that will append data to "*dest".
   // "*dest" must have initial length "dest_length".
   // "*dest" must remain live while this Writer is in use.
   Writer(WritableFile* dest, uint64_t dest_length);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   ~Writer();
 
   Status AddRecord(const Slice& slice);

@@ -5,6 +5,7 @@
 // AtomicPointer provides storage for a lock-free pointer.
 // Platform-dependent implementation of AtomicPointer:
 // - If the platform provides a cheap barrier, we use it with raw pointers
+<<<<<<< HEAD
 // - If <atomic> is present (on newer versions of gcc, it is), we use
 //   a <atomic>-based AtomicPointer.  However we prefer the memory
 //   barrier based version, because at least on a gcc 4.4 32-bit build
@@ -12,6 +13,16 @@
 //   Also, some <atomic> implementations are much slower than a memory-barrier
 //   based implementation (~16ns for <atomic> based acquire-load vs. ~1ns for
 //   a barrier based acquire-load).
+=======
+// - If cstdatomic is present (on newer versions of gcc, it is), we use
+//   a cstdatomic-based AtomicPointer.  However we prefer the memory
+//   barrier based version, because at least on a gcc 4.4 32-bit build
+//   on linux, we have encountered a buggy <cstdatomic>
+//   implementation.  Also, some <cstdatomic> implementations are much
+//   slower than a memory-barrier based implementation (~16ns for
+//   <cstdatomic> based acquire-load vs. ~1ns for a barrier based
+//   acquire-load).
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // This code is based on atomicops-internals-* in Google's perftools:
 // http://code.google.com/p/google-perftools/source/browse/#svn%2Ftrunk%2Fsrc%2Fbase
 
@@ -19,8 +30,13 @@
 #define PORT_ATOMIC_POINTER_H_
 
 #include <stdint.h>
+<<<<<<< HEAD
 #ifdef LEVELDB_ATOMIC_PRESENT
 #include <atomic>
+=======
+#ifdef LEVELDB_CSTDATOMIC_PRESENT
+#include <cstdatomic>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #endif
 #ifdef OS_WIN
 #include <windows.h>
@@ -35,17 +51,23 @@
 #define ARCH_CPU_X86_FAMILY 1
 #elif defined(__ARMEL__)
 #define ARCH_CPU_ARM_FAMILY 1
+<<<<<<< HEAD
 #elif defined(__aarch64__)
 #define ARCH_CPU_ARM64_FAMILY 1
 #elif defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__)
 #define ARCH_CPU_PPC_FAMILY 1
 #elif defined(__mips__)
 #define ARCH_CPU_MIPS_FAMILY 1
+=======
+#elif defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__)
+#define ARCH_CPU_PPC_FAMILY 1
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #endif
 
 namespace leveldb {
 namespace port {
 
+<<<<<<< HEAD
 // AtomicPointer based on <cstdatomic> if available
 #if defined(LEVELDB_ATOMIC_PRESENT)
 class AtomicPointer {
@@ -70,6 +92,8 @@ class AtomicPointer {
 
 #else
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // Define MemoryBarrier() if available
 // Windows on x86
 #if defined(OS_WIN) && defined(COMPILER_MSVC) && defined(ARCH_CPU_X86_FAMILY)
@@ -96,7 +120,11 @@ inline void MemoryBarrier() {
 // Sun Studio
 #elif defined(ARCH_CPU_X86_FAMILY) && defined(__SUNPRO_CC)
 inline void MemoryBarrier() {
+<<<<<<< HEAD
   // See http://gcc.gnu.org/ml/gcc/2003-04/msg01180.html for a discussion on
+=======
+     	// See http://gcc.gnu.org/ml/gcc/2003-04/msg01180.html for a discussion on
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // this idiom. Also see http://en.wikipedia.org/wiki/Memory_ordering.
   asm volatile("" : : : "memory");
 }
@@ -120,6 +148,7 @@ inline void MemoryBarrier() {
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
+<<<<<<< HEAD
 // ARM64
 #elif defined(ARCH_CPU_ARM64_FAMILY)
 inline void MemoryBarrier() {
@@ -127,6 +156,8 @@ inline void MemoryBarrier() {
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // PPC
 #elif defined(ARCH_CPU_PPC_FAMILY) && defined(__GNUC__)
 inline void MemoryBarrier() {
@@ -136,6 +167,7 @@ inline void MemoryBarrier() {
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
+<<<<<<< HEAD
 // MIPS
 #elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
 inline void MemoryBarrier() {
@@ -143,6 +175,8 @@ inline void MemoryBarrier() {
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #endif
 
 // AtomicPointer built using platform-specific MemoryBarrier()
@@ -166,6 +200,31 @@ class AtomicPointer {
   }
 };
 
+<<<<<<< HEAD
+=======
+// AtomicPointer based on <cstdatomic>
+#elif defined(LEVELDB_CSTDATOMIC_PRESENT)
+class AtomicPointer {
+ private:
+  std::atomic<void*> rep_;
+ public:
+  AtomicPointer() { }
+  explicit AtomicPointer(void* v) : rep_(v) { }
+  inline void* Acquire_Load() const {
+    return rep_.load(std::memory_order_acquire);
+  }
+  inline void Release_Store(void* v) {
+    rep_.store(v, std::memory_order_release);
+  }
+  inline void* NoBarrier_Load() const {
+    return rep_.load(std::memory_order_relaxed);
+  }
+  inline void NoBarrier_Store(void* v) {
+    rep_.store(v, std::memory_order_relaxed);
+  }
+};
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // Atomic pointer based on sparc memory barriers
 #elif defined(__sparcv9) && defined(__GNUC__)
 class AtomicPointer {
@@ -226,17 +285,27 @@ class AtomicPointer {
   inline void NoBarrier_Store(void* v) { rep_ = v; }
 };
 
+<<<<<<< HEAD
 // We have neither MemoryBarrier(), nor <atomic>
+=======
+// We have neither MemoryBarrier(), nor <cstdatomic>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #else
 #error Please implement AtomicPointer for this platform.
 
 #endif
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 #undef LEVELDB_HAVE_MEMORY_BARRIER
 #undef ARCH_CPU_X86_FAMILY
 #undef ARCH_CPU_ARM_FAMILY
+<<<<<<< HEAD
 #undef ARCH_CPU_ARM64_FAMILY
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #undef ARCH_CPU_PPC_FAMILY
 
 }  // namespace port

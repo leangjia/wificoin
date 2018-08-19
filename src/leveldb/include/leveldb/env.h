@@ -13,9 +13,15 @@
 #ifndef STORAGE_LEVELDB_INCLUDE_ENV_H_
 #define STORAGE_LEVELDB_INCLUDE_ENV_H_
 
+<<<<<<< HEAD
 #include <string>
 #include <vector>
 #include <stdarg.h>
+=======
+#include <cstdarg>
+#include <string>
+#include <vector>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #include <stdint.h>
 #include "leveldb/status.h"
 
@@ -69,6 +75,7 @@ class Env {
   virtual Status NewWritableFile(const std::string& fname,
                                  WritableFile** result) = 0;
 
+<<<<<<< HEAD
   // Create an object that either appends to an existing file, or
   // writes to a new file (if the file does not exist to begin with).
   // On success, stores a pointer to the new file in *result and
@@ -84,6 +91,8 @@ class Env {
   virtual Status NewAppendableFile(const std::string& fname,
                                    WritableFile** result);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // Returns true iff the named file exists.
   virtual bool FileExists(const std::string& fname) = 0;
 
@@ -157,7 +166,11 @@ class Env {
   // useful for computing deltas of time.
   virtual uint64_t NowMicros() = 0;
 
+<<<<<<< HEAD
   // Sleep/delay the thread for the prescribed number of micro-seconds.
+=======
+  // Sleep/delay the thread for the perscribed number of micro-seconds.
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   virtual void SleepForMicroseconds(int micros) = 0;
 
  private:
@@ -304,9 +317,12 @@ class EnvWrapper : public Env {
   Status NewWritableFile(const std::string& f, WritableFile** r) {
     return target_->NewWritableFile(f, r);
   }
+<<<<<<< HEAD
   Status NewAppendableFile(const std::string& f, WritableFile** r) {
     return target_->NewAppendableFile(f, r);
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   bool FileExists(const std::string& f) { return target_->FileExists(f); }
   Status GetChildren(const std::string& dir, std::vector<std::string>* r) {
     return target_->GetChildren(dir, r);

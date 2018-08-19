@@ -27,7 +27,10 @@ TEST(FileNameTest, Parse) {
     { "100.log",            100,   kLogFile },
     { "0.log",              0,     kLogFile },
     { "0.sst",              0,     kTableFile },
+<<<<<<< HEAD
     { "0.ldb",              0,     kTableFile },
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     { "CURRENT",            0,     kCurrentFile },
     { "LOCK",               0,     kDBLockFile },
     { "MANIFEST-2",         2,     kDescriptorFile },

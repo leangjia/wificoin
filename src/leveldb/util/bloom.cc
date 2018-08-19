@@ -29,7 +29,11 @@ class BloomFilterPolicy : public FilterPolicy {
   }
 
   virtual const char* Name() const {
+<<<<<<< HEAD
     return "leveldb.BuiltinBloomFilter2";
+=======
+    return "leveldb.BuiltinBloomFilter";
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
   virtual void CreateFilter(const Slice* keys, int n, std::string* dst) const {
@@ -47,7 +51,11 @@ class BloomFilterPolicy : public FilterPolicy {
     dst->resize(init_size + bytes, 0);
     dst->push_back(static_cast<char>(k_));  // Remember # of probes in filter
     char* array = &(*dst)[init_size];
+<<<<<<< HEAD
     for (int i = 0; i < n; i++) {
+=======
+    for (size_t i = 0; i < n; i++) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       // Use double-hashing to generate a sequence of hash values.
       // See analysis in [Kirsch,Mitzenmacher 2006].
       uint32_t h = BloomHash(keys[i]);

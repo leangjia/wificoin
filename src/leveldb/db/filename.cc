@@ -31,11 +31,14 @@ std::string LogFileName(const std::string& name, uint64_t number) {
 
 std::string TableFileName(const std::string& name, uint64_t number) {
   assert(number > 0);
+<<<<<<< HEAD
   return MakeFileName(name, number, "ldb");
 }
 
 std::string SSTTableFileName(const std::string& name, uint64_t number) {
   assert(number > 0);
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   return MakeFileName(name, number, "sst");
 }
 
@@ -76,7 +79,11 @@ std::string OldInfoLogFileName(const std::string& dbname) {
 //    dbname/LOG
 //    dbname/LOG.old
 //    dbname/MANIFEST-[0-9]+
+<<<<<<< HEAD
 //    dbname/[0-9]+.(log|sst|ldb)
+=======
+//    dbname/[0-9]+.(log|sst)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 bool ParseFileName(const std::string& fname,
                    uint64_t* number,
                    FileType* type) {
@@ -111,7 +118,11 @@ bool ParseFileName(const std::string& fname,
     Slice suffix = rest;
     if (suffix == Slice(".log")) {
       *type = kLogFile;
+<<<<<<< HEAD
     } else if (suffix == Slice(".sst") || suffix == Slice(".ldb")) {
+=======
+    } else if (suffix == Slice(".sst")) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       *type = kTableFile;
     } else if (suffix == Slice(".dbtmp")) {
       *type = kTempFile;

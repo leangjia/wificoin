@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 src/clientversion.cpp export-subst
+=======
+src/version.cpp export-subst
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

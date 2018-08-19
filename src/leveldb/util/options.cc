@@ -21,10 +21,18 @@ Options::Options()
       block_cache(NULL),
       block_size(4096),
       block_restart_interval(16),
+<<<<<<< HEAD
       max_file_size(2<<20),
       compression(kSnappyCompression),
       reuse_logs(false),
       filter_policy(NULL) {
 }
 
+=======
+      compression(kSnappyCompression),
+      filter_policy(NULL) {
+}
+
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }  // namespace leveldb

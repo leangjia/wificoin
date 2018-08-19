@@ -1,4 +1,5 @@
 #!/bin/sh
+<<<<<<< HEAD
 # Copyright (c) 2012-2016 The WiFicoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -6,6 +7,9 @@
 if [ $# -gt 1 ]; then
     cd "$2"
 fi
+=======
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 if [ $# -gt 0 ]; then
     FILE="$1"
     shift
@@ -13,6 +17,7 @@ if [ $# -gt 0 ]; then
         INFO="$(head -n 1 "$FILE")"
     fi
 else
+<<<<<<< HEAD
     echo "Usage: $0 <filename> <srcroot>"
     exit 1
 fi
@@ -42,6 +47,15 @@ if [ -n "$DESC" ]; then
     NEWINFO="#define BUILD_DESC \"$DESC\""
 elif [ -n "$SUFFIX" ]; then
     NEWINFO="#define BUILD_SUFFIX $SUFFIX"
+=======
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+
+if [ -n "$DESC" ]; then
+    NEWINFO="#define BUILD_DESC \"$DESC\""
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 else
     NEWINFO="// No build information available"
 fi
@@ -49,4 +63,8 @@ fi
 # only update build.h if necessary
 if [ "$INFO" != "$NEWINFO" ]; then
     echo "$NEWINFO" >"$FILE"
+<<<<<<< HEAD
+=======
+    echo "#define BUILD_DATE \"$TIME\"" >>"$FILE"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 fi

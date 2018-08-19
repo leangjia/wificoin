@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -11,18 +12,36 @@ QValidatedLineEdit::QValidatedLineEdit(QWidget *parent) :
     QLineEdit(parent),
     valid(true),
     checkValidator(0)
+=======
+#include "qvalidatedlineedit.h"
+
+#include "guiconstants.h"
+
+QValidatedLineEdit::QValidatedLineEdit(QWidget *parent) :
+    QLineEdit(parent), valid(true)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     connect(this, SIGNAL(textChanged(QString)), this, SLOT(markValid()));
 }
 
+<<<<<<< HEAD
 void QValidatedLineEdit::setValid(bool _valid)
 {
     if(_valid == this->valid)
+=======
+void QValidatedLineEdit::setValid(bool valid)
+{
+    if(valid == this->valid)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     {
         return;
     }
 
+<<<<<<< HEAD
     if(_valid)
+=======
+    if(valid)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     {
         setStyleSheet("");
     }
@@ -30,13 +49,18 @@ void QValidatedLineEdit::setValid(bool _valid)
     {
         setStyleSheet(STYLE_INVALID);
     }
+<<<<<<< HEAD
     this->valid = _valid;
+=======
+    this->valid = valid;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 void QValidatedLineEdit::focusInEvent(QFocusEvent *evt)
 {
     // Clear invalid flag on focus
     setValid(true);
+<<<<<<< HEAD
 
     QLineEdit::focusInEvent(evt);
 }
@@ -51,6 +75,13 @@ void QValidatedLineEdit::focusOutEvent(QFocusEvent *evt)
 void QValidatedLineEdit::markValid()
 {
     // As long as a user is typing ensure we display state as valid
+=======
+    QLineEdit::focusInEvent(evt);
+}
+
+void QValidatedLineEdit::markValid()
+{
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     setValid(true);
 }
 
@@ -59,6 +90,7 @@ void QValidatedLineEdit::clear()
     setValid(true);
     QLineEdit::clear();
 }
+<<<<<<< HEAD
 
 void QValidatedLineEdit::setEnabled(bool enabled)
 {
@@ -121,3 +153,5 @@ bool QValidatedLineEdit::isValid()
 
     return valid;
 }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

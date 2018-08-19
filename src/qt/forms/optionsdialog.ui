@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>560</width>
     <height>440</height>
+=======
+    <width>540</width>
+    <height>380</height>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +24,12 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+<<<<<<< HEAD
+=======
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -28,31 +39,56 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Main">
        <item>
+<<<<<<< HEAD
         <widget class="QCheckBox" name="wificoinAtStartup">
          <property name="toolTip">
           <string>Automatically start %1 after logging in to the system.</string>
          </property>
          <property name="text">
           <string>&amp;Start %1 on system login</string>
+=======
+        <widget class="QLabel" name="transactionFeeInfoLabel">
+         <property name="text">
+          <string>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB.</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
         </widget>
        </item>
        <item>
+<<<<<<< HEAD
         <layout class="QHBoxLayout" name="horizontalLayout_2_Main">
          <item>
           <widget class="QLabel" name="databaseCacheLabel">
            <property name="text">
             <string>Size of &amp;database cache</string>
+=======
+        <layout class="QHBoxLayout" name="horizontalLayout_1_Main">
+         <item>
+          <widget class="QLabel" name="transactionFeeLabel">
+           <property name="text">
+            <string>Pay transaction &amp;fee</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
            </property>
            <property name="buddy">
+<<<<<<< HEAD
             <cstring>databaseCache</cstring>
+=======
+            <cstring>transactionFee</cstring>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <widget class="QSpinBox" name="databaseCache"/>
          </item>
          <item>
@@ -67,6 +103,12 @@
          </item>
          <item>
           <spacer name="horizontalSpacer_2_Main">
+=======
+          <widget class="BitcoinAmountField" name="transactionFee"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_1_Main">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -81,6 +123,7 @@
         </layout>
        </item>
        <item>
+<<<<<<< HEAD
         <layout class="QHBoxLayout" name="horizontalLayout_3_Main">
          <item>
           <widget class="QLabel" name="threadsScriptVerifLabel">
@@ -168,6 +211,19 @@
        </item>
        <item>
         <spacer name="verticalSpacer_Wallet">
+=======
+        <widget class="QCheckBox" name="bitcoinAtStartup">
+         <property name="toolTip">
+          <string>Automatically start rainbowcoin after logging in to the system.</string>
+         </property>
+         <property name="text">
+          <string>&amp;Start rainbowcoin on system login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_Main">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -179,6 +235,39 @@
          </property>
         </spacer>
        </item>
+<<<<<<< HEAD
+=======
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2_Main">
+         <item>
+          <spacer name="horizontalSpacer_2_Main">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="resetButton">
+           <property name="toolTip">
+            <string>Reset all client options to default.</string>
+           </property>
+           <property name="text">
+            <string>&amp;Reset Options</string>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       </layout>
      </widget>
      <widget class="QWidget" name="tabNetwork">
@@ -189,7 +278,11 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Automatically open the WiFicoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+=======
+          <string>Automatically open the rainbowcoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -197,6 +290,7 @@
         </widget>
        </item>
        <item>
+<<<<<<< HEAD
         <widget class="QCheckBox" name="allowIncoming">
          <property name="toolTip">
           <string>Accept connections from outside</string>
@@ -213,11 +307,23 @@
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
+=======
+        <widget class="QCheckBox" name="connectSocks">
+         <property name="toolTip">
+          <string>Connect to the rainbowcoin network through a SOCKS proxy (e.g. when connecting through Tor).</string>
+         </property>
+         <property name="text">
+          <string>&amp;Connect through SOCKS proxy:</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
         </widget>
        </item>
        <item>
+<<<<<<< HEAD
         <layout class="QHBoxLayout" name="horizontalLayout_1_Network">
+=======
+        <layout class="QHBoxLayout" name="horizontalLayout_Network">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          <item>
           <widget class="QLabel" name="proxyIpLabel">
            <property name="text">
@@ -233,12 +339,15 @@
          </item>
          <item>
           <widget class="QValidatedLineEdit" name="proxyIp">
+<<<<<<< HEAD
            <property name="minimumSize">
             <size>
              <width>140</width>
              <height>0</height>
             </size>
            </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            <property name="maximumSize">
             <size>
              <width>140</width>
@@ -246,7 +355,11 @@
             </size>
            </property>
            <property name="toolTip">
+<<<<<<< HEAD
             <string>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</string>
+=======
+            <string>IP address of the proxy (e.g. 127.0.0.1)</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
@@ -265,12 +378,15 @@
          </item>
          <item>
           <widget class="QLineEdit" name="proxyPort">
+<<<<<<< HEAD
            <property name="minimumSize">
             <size>
              <width>55</width>
              <height>0</height>
             </size>
            </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            <property name="maximumSize">
             <size>
              <width>55</width>
@@ -283,6 +399,7 @@
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <spacer name="horizontalSpacer_1_Network">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -409,16 +526,26 @@
           <widget class="QLabel" name="proxyIpTorLabel">
            <property name="text">
             <string>Proxy &amp;IP:</string>
+=======
+          <widget class="QLabel" name="socksVersionLabel">
+           <property name="text">
+            <string>SOCKS &amp;Version:</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
            </property>
            <property name="buddy">
+<<<<<<< HEAD
             <cstring>proxyIpTor</cstring>
+=======
+            <cstring>socksVersion</cstring>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <widget class="QValidatedLineEdit" name="proxyIpTor">
            <property name="minimumSize">
             <size>
@@ -434,10 +561,16 @@
            </property>
            <property name="toolTip">
             <string>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</string>
+=======
+          <widget class="QValueComboBox" name="socksVersion">
+           <property name="toolTip">
+            <string>SOCKS version of the proxy (e.g. 5)</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <widget class="QLabel" name="proxyPortTorLabel">
            <property name="text">
             <string>&amp;Port:</string>
@@ -471,6 +604,9 @@
          </item>
          <item>
           <spacer name="horizontalSpacer_4_Network">
+=======
+          <spacer name="horizontalSpacer_Network">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -505,6 +641,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Window">
        <item>
+<<<<<<< HEAD
         <widget class="QCheckBox" name="hideTrayIcon">
          <property name="toolTip">
           <string>&amp;Hide the icon from the system tray.</string>
@@ -515,6 +652,8 @@
         </widget>
        </item>
        <item>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         <widget class="QCheckBox" name="minimizeToTray">
          <property name="toolTip">
           <string>Show only a tray icon after minimizing the window.</string>
@@ -527,7 +666,11 @@
        <item>
         <widget class="QCheckBox" name="minimizeOnClose">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</string>
+=======
+          <string>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
          <property name="text">
           <string>M&amp;inimize on close</string>
@@ -572,7 +715,11 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The user interface language can be set here. This setting will take effect after restarting %1.</string>
+=======
+            <string>The user interface language can be set here. This setting will take effect after restarting rainbowcoin.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
@@ -603,6 +750,7 @@
         </layout>
        </item>
        <item>
+<<<<<<< HEAD
         <layout class="QHBoxLayout" name="horizontalLayout_3_Display">
          <item>
           <widget class="QLabel" name="thirdPartyTxUrlsLabel">
@@ -625,6 +773,16 @@
           </widget>
          </item>
         </layout>
+=======
+        <widget class="QCheckBox" name="displayAddresses">
+         <property name="toolTip">
+          <string>Whether to show rainbowcoin addresses in the transaction list or not.</string>
+         </property>
+         <property name="text">
+          <string>&amp;Display addresses in transaction list</string>
+         </property>
+        </widget>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </item>
        <item>
         <spacer name="verticalSpacer_Display">
@@ -644,6 +802,7 @@
     </widget>
    </item>
    <item>
+<<<<<<< HEAD
     <widget class="QFrame" name="frame">
      <layout class="QVBoxLayout" name="verticalLayout_Bottom">
       <item>
@@ -722,6 +881,10 @@
       </layout>
      </item>
      <item>
+=======
+    <layout class="QHBoxLayout" name="horizontalLayout_Buttons">
+     <item>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       <spacer name="horizontalSpacer_1">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -736,12 +899,15 @@
      </item>
      <item>
       <widget class="QLabel" name="statusLabel">
+<<<<<<< HEAD
        <property name="minimumSize">
         <size>
          <width>200</width>
          <height>0</height>
         </size>
        </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        <property name="font">
         <font>
          <weight>75</weight>
@@ -773,6 +939,7 @@
       </spacer>
      </item>
      <item>
+<<<<<<< HEAD
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <spacer name="verticalSpacer">
@@ -815,6 +982,33 @@
         </layout>
        </item>
       </layout>
+=======
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>&amp;OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>&amp;Cancel</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="applyButton">
+       <property name="text">
+        <string>&amp;Apply</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      </item>
     </layout>
    </item>
@@ -822,15 +1016,29 @@
  </widget>
  <customwidgets>
   <customwidget>
+<<<<<<< HEAD
    <class>QValidatedLineEdit</class>
    <extends>QLineEdit</extends>
    <header>qvalidatedlineedit.h</header>
+=======
+   <class>BitcoinAmountField</class>
+   <extends>QSpinBox</extends>
+   <header>bitcoinamountfield.h</header>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   </customwidget>
   <customwidget>
    <class>QValueComboBox</class>
    <extends>QComboBox</extends>
    <header>qvaluecombobox.h</header>
   </customwidget>
+<<<<<<< HEAD
+=======
+  <customwidget>
+   <class>QValidatedLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>qvalidatedlineedit.h</header>
+  </customwidget>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  </customwidgets>
  <resources/>
  <connections/>

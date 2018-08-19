@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -17,10 +18,17 @@
 class ClientModel;
 class PlatformStyle;
 class RPCTimerInterface;
+=======
+#ifndef RPCCONSOLE_H
+#define RPCCONSOLE_H
+
+#include <QDialog>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 namespace Ui {
     class RPCConsole;
 }
+<<<<<<< HEAD
 
 QT_BEGIN_NAMESPACE
 class QMenu;
@@ -29,10 +37,17 @@ QT_END_NAMESPACE
 
 /** Local WiFicoin RPC console. */
 class RPCConsole: public QWidget
+=======
+class ClientModel;
+
+/** Local Bitcoin RPC console. */
+class RPCConsole: public QDialog
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     Q_OBJECT
 
 public:
+<<<<<<< HEAD
     explicit RPCConsole(const PlatformStyle *platformStyle, QWidget *parent);
     ~RPCConsole();
 
@@ -41,6 +56,11 @@ public:
         return RPCParseCommandLine(strResult, strCommand, true, pstrFilteredOut);
     }
 
+=======
+    explicit RPCConsole(QWidget *parent = 0);
+    ~RPCConsole();
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     void setClientModel(ClientModel *model);
 
     enum MessageClass {
@@ -51,6 +71,7 @@ public:
         CMD_ERROR
     };
 
+<<<<<<< HEAD
     enum TabTypes {
         TAB_INFO = 0,
         TAB_CONSOLE = 1,
@@ -63,10 +84,17 @@ protected:
     void keyPressEvent(QKeyEvent *);
 
 private Q_SLOTS:
+=======
+protected:
+    virtual bool eventFilter(QObject* obj, QEvent *event);
+
+private slots:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     void on_lineEdit_returnPressed();
     void on_tabWidget_currentChanged(int index);
     /** open the debug.log from the current datadir */
     void on_openDebugLogfileButton_clicked();
+<<<<<<< HEAD
     /** change the time range of the network traffic graph */
     void on_sldGraphRange_valueChanged(int value);
     /** update traffic statistics */
@@ -98,10 +126,23 @@ public Q_SLOTS:
     void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool headers);
     /** Set size (number of transactions and memory usage) of the mempool in the UI */
     void setMempoolSize(long numberOfTxs, size_t dynUsage);
+=======
+    /** display messagebox with program parameters (same as bitcoin-qt --help) */
+    void on_showCLOptionsButton_clicked();
+
+public slots:
+    void clear();
+    void message(int category, const QString &message, bool html = false);
+    /** Set number of connections shown in the UI */
+    void setNumConnections(int count);
+    /** Set number of blocks shown in the UI */
+    void setNumBlocks(int count, int countOfPeers);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     /** Go forward or back in history */
     void browseHistory(int offset);
     /** Scroll console view to end */
     void scrollToEnd();
+<<<<<<< HEAD
     /** Handle selection of peer in peers list */
     void peerSelected(const QItemSelection &selected, const QItemSelection &deselected);
     /** Handle selection caching before update */
@@ -118,11 +159,15 @@ public Q_SLOTS:
     void setTabFocus(enum TabTypes tabType);
 
 Q_SIGNALS:
+=======
+signals:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     // For RPC command executor
     void stopExecutor();
     void cmdRequest(const QString &command);
 
 private:
+<<<<<<< HEAD
     static QString FormatBytes(quint64 bytes);
     void startExecutor();
     void setTrafficGraphRange(int mins);
@@ -139,10 +184,13 @@ private:
 
     };
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     Ui::RPCConsole *ui;
     ClientModel *clientModel;
     QStringList history;
     int historyPtr;
+<<<<<<< HEAD
     QString cmdBeforeBrowsing;
     QList<NodeId> cachedNodeids;
     const PlatformStyle *platformStyle;
@@ -158,3 +206,10 @@ private:
 };
 
 #endif // WIFICOIN_QT_RPCCONSOLE_H
+=======
+
+    void startExecutor();
+};
+
+#endif // RPCCONSOLE_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

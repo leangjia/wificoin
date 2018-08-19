@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
+<<<<<<< HEAD
    <string notr="true">Transaction details</string>
+=======
+   <string>Transaction details</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -45,12 +49,21 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>
@@ -61,12 +74,21 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>

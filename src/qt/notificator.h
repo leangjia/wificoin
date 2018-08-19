@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -15,6 +16,16 @@
 QT_BEGIN_NAMESPACE
 class QSystemTrayIcon;
 
+=======
+#ifndef NOTIFICATOR_H
+#define NOTIFICATOR_H
+
+#include <QObject>
+#include <QIcon>
+
+QT_BEGIN_NAMESPACE
+class QSystemTrayIcon;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #ifdef USE_DBUS
 class QDBusInterface;
 #endif
@@ -29,7 +40,11 @@ public:
     /** Create a new notificator.
        @note Ownership of trayIcon is not transferred to this object.
     */
+<<<<<<< HEAD
     Notificator(const QString &programName, QSystemTrayIcon *trayIcon, QWidget *parent);
+=======
+    Notificator(const QString &programName=QString(), QSystemTrayIcon *trayIcon=0, QWidget *parent=0);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     ~Notificator();
 
     // Message class
@@ -40,7 +55,11 @@ public:
         Critical        /**< An error occurred */
     };
 
+<<<<<<< HEAD
 public Q_SLOTS:
+=======
+public slots:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     /** Show notification message.
        @param[in] cls    general message class
        @param[in] title  title shown with message
@@ -55,12 +74,20 @@ public Q_SLOTS:
 private:
     QWidget *parent;
     enum Mode {
+<<<<<<< HEAD
         None,                       /**< Ignore informational notifications, and show a modal pop-up dialog for Critical notifications. */
         Freedesktop,                /**< Use DBus org.freedesktop.Notifications */
         QSystemTray,                /**< Use QSystemTray::showMessage */
         Growl12,                    /**< Use the Growl 1.2 notification system (Mac only) */
         Growl13,                    /**< Use the Growl 1.3 notification system (Mac only) */
         UserNotificationCenter      /**< Use the 10.8+ User Notification Center (Mac only) */
+=======
+        None,           /**< Ignore informational notifications, and show a modal pop-up dialog for Critical notifications. */
+        Freedesktop,    /**< Use DBus org.freedesktop.Notifications */
+        QSystemTray,    /**< Use QSystemTray::showMessage */
+        Growl12,        /**< Use the Growl 1.2 notification system (Mac only) */
+        Growl13         /**< Use the Growl 1.3 notification system (Mac only) */
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     };
     QString programName;
     Mode mode;
@@ -73,8 +100,15 @@ private:
     void notifySystray(Class cls, const QString &title, const QString &text, const QIcon &icon, int millisTimeout);
 #ifdef Q_OS_MAC
     void notifyGrowl(Class cls, const QString &title, const QString &text, const QIcon &icon);
+<<<<<<< HEAD
     void notifyMacUserNotificationCenter(Class cls, const QString &title, const QString &text, const QIcon &icon);
 #endif
 };
 
 #endif // WIFICOIN_QT_NOTIFICATOR_H
+=======
+#endif
+};
+
+#endif // NOTIFICATOR_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

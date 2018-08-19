@@ -186,7 +186,11 @@ class Repairer {
     reporter.env = env_;
     reporter.info_log = options_.info_log;
     reporter.lognum = log;
+<<<<<<< HEAD
     // We intentionally make log::Reader do checksumming so that
+=======
+    // We intentially make log::Reader do checksumming so that
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     // corruptions cause entire commits to be skipped instead of
     // propagating bad information (like overly large sequence
     // numbers).
@@ -242,6 +246,7 @@ class Repairer {
   }
 
   void ExtractMetaData() {
+<<<<<<< HEAD
     for (size_t i = 0; i < table_numbers_.size(); i++) {
       ScanTable(table_numbers_[i]);
     }
@@ -370,6 +375,64 @@ class Repairer {
     if (!s.ok()) {
       env_->DeleteFile(copy);
     }
+=======
+    std::vector<TableInfo> kept;
+    for (size_t i = 0; i < table_numbers_.size(); i++) {
+      TableInfo t;
+      t.meta.number = table_numbers_[i];
+      Status status = ScanTable(&t);
+      if (!status.ok()) {
+        std::string fname = TableFileName(dbname_, table_numbers_[i]);
+        Log(options_.info_log, "Table #%llu: ignoring %s",
+            (unsigned long long) table_numbers_[i],
+            status.ToString().c_str());
+        ArchiveFile(fname);
+      } else {
+        tables_.push_back(t);
+      }
+    }
+  }
+
+  Status ScanTable(TableInfo* t) {
+    std::string fname = TableFileName(dbname_, t->meta.number);
+    int counter = 0;
+    Status status = env_->GetFileSize(fname, &t->meta.file_size);
+    if (status.ok()) {
+      Iterator* iter = table_cache_->NewIterator(
+          ReadOptions(), t->meta.number, t->meta.file_size);
+      bool empty = true;
+      ParsedInternalKey parsed;
+      t->max_sequence = 0;
+      for (iter->SeekToFirst(); iter->Valid(); iter->Next()) {
+        Slice key = iter->key();
+        if (!ParseInternalKey(key, &parsed)) {
+          Log(options_.info_log, "Table #%llu: unparsable key %s",
+              (unsigned long long) t->meta.number,
+              EscapeString(key).c_str());
+          continue;
+        }
+
+        counter++;
+        if (empty) {
+          empty = false;
+          t->meta.smallest.DecodeFrom(key);
+        }
+        t->meta.largest.DecodeFrom(key);
+        if (parsed.sequence > t->max_sequence) {
+          t->max_sequence = parsed.sequence;
+        }
+      }
+      if (!iter->status().ok()) {
+        status = iter->status();
+      }
+      delete iter;
+    }
+    Log(options_.info_log, "Table #%llu: %d entries %s",
+        (unsigned long long) t->meta.number,
+        counter,
+        status.ToString().c_str());
+    return status;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
   Status WriteDescriptor() {

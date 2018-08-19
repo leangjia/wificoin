@@ -1,13 +1,17 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #include "csvmodelwriter.h"
 
 #include <QAbstractItemModel>
 #include <QFile>
 #include <QTextStream>
 
+<<<<<<< HEAD
 CSVModelWriter::CSVModelWriter(const QString &_filename, QObject *parent) :
     QObject(parent),
     filename(_filename), model(0)
@@ -17,6 +21,17 @@ CSVModelWriter::CSVModelWriter(const QString &_filename, QObject *parent) :
 void CSVModelWriter::setModel(const QAbstractItemModel *_model)
 {
     this->model = _model;
+=======
+CSVModelWriter::CSVModelWriter(const QString &filename, QObject *parent) :
+    QObject(parent),
+    filename(filename), model(0)
+{
+}
+
+void CSVModelWriter::setModel(const QAbstractItemModel *model)
+{
+    this->model = model;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 void CSVModelWriter::addColumn(const QString &title, int column, int role)
@@ -89,3 +104,7 @@ bool CSVModelWriter::write()
 
     return file.error() == QFile::NoError;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

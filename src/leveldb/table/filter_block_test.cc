@@ -29,7 +29,11 @@ class TestHashFilter : public FilterPolicy {
 
   virtual bool KeyMayMatch(const Slice& key, const Slice& filter) const {
     uint32_t h = Hash(key.data(), key.size(), 1);
+<<<<<<< HEAD
     for (size_t i = 0; i + 4 <= filter.size(); i += 4) {
+=======
+    for (int i = 0; i + 4 <= filter.size(); i += 4) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       if (h == DecodeFixed32(filter.data() + i)) {
         return true;
       }

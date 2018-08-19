@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2014 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef WIFICOIN_QT_TRANSACTIONDESCDIALOG_H
 #define WIFICOIN_QT_TRANSACTIONDESCDIALOG_H
+=======
+#ifndef TRANSACTIONDESCDIALOG_H
+#define TRANSACTIONDESCDIALOG_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 #include <QDialog>
 
@@ -28,4 +33,8 @@ private:
     Ui::TransactionDescDialog *ui;
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_TRANSACTIONDESCDIALOG_H
+=======
+#endif // TRANSACTIONDESCDIALOG_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

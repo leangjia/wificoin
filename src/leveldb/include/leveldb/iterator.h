@@ -37,7 +37,11 @@ class Iterator {
   // Valid() after this call iff the source is not empty.
   virtual void SeekToLast() = 0;
 
+<<<<<<< HEAD
   // Position at the first key in the source that is at or past target.
+=======
+  // Position at the first key in the source that at or past target
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // The iterator is Valid() after this call iff the source contains
   // an entry that comes at or past target.
   virtual void Seek(const Slice& target) = 0;
@@ -61,7 +65,11 @@ class Iterator {
   // Return the value for the current entry.  The underlying storage for
   // the returned slice is valid only until the next modification of
   // the iterator.
+<<<<<<< HEAD
   // REQUIRES: Valid()
+=======
+  // REQUIRES: !AtEnd() && !AtStart()
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   virtual Slice value() const = 0;
 
   // If an error has occurred, return it.  Else return an ok status.

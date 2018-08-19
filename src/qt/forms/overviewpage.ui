@@ -6,7 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>596</width>
+=======
+    <width>573</width>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     <height>342</height>
    </rect>
   </property>
@@ -20,7 +24,11 @@
       <bool>false</bool>
      </property>
      <property name="styleSheet">
+<<<<<<< HEAD
       <string notr="true">QLabel { background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop:0 #F0D0A0, stop:1 #F8D488); color:#000000; }</string>
+=======
+      <string notr="true">background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop:0 #F0D0A0, stop:1 #F8D488); color:#000000;</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -28,9 +36,12 @@
      <property name="margin">
       <number>3</number>
      </property>
+<<<<<<< HEAD
      <property name="textInteractionFlags">
       <set>Qt::TextSelectableByMouse</set>
      </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </widget>
    </item>
    <item>
@@ -57,11 +68,16 @@
                </font>
               </property>
               <property name="text">
+<<<<<<< HEAD
                <string>Balances</string>
+=======
+               <string>Wallet</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
              </widget>
             </item>
             <item>
+<<<<<<< HEAD
              <widget class="QPushButton" name="labelWalletStatus">
               <property name="enabled">
                <bool>true</bool>
@@ -91,11 +107,29 @@
               </property>
               <property name="flat">
                <bool>true</bool>
+=======
+             <widget class="QLabel" name="labelWalletStatus">
+              <property name="toolTip">
+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the rainbowcoin network after a connection is established, but this process has not completed yet.</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel { color: red; }</string>
+              </property>
+              <property name="text">
+               <string notr="true">(out of sync)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
              </widget>
             </item>
             <item>
+<<<<<<< HEAD
              <spacer name="horizontalSpacer_3">
+=======
+             <spacer name="horizontalSpacer_2">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -110,6 +144,7 @@
            </layout>
           </item>
           <item>
+<<<<<<< HEAD
            <layout class="QGridLayout" name="gridLayout">
             <property name="spacing">
              <number>12</number>
@@ -166,6 +201,27 @@
             </item>
             <item row="3" column="2">
              <widget class="QLabel" name="labelWatchImmature">
+=======
+           <layout class="QFormLayout" name="formLayout_2">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+            </property>
+            <property name="horizontalSpacing">
+             <number>12</number>
+            </property>
+            <property name="verticalSpacing">
+             <number>12</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Balance:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="labelBalance">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               <property name="font">
                <font>
                 <weight>75</weight>
@@ -176,6 +232,7 @@
                <cursorShape>IBeamCursor</cursorShape>
               </property>
               <property name="toolTip">
+<<<<<<< HEAD
                <string>Mined balance in watch-only addresses that has not yet matured</string>
               </property>
               <property name="text">
@@ -183,12 +240,19 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+=======
+               <string>Your current balance</string>
+              </property>
+              <property name="text">
+               <string notr="true">0 LGBT</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
               <property name="textInteractionFlags">
                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
+<<<<<<< HEAD
             <item row="4" column="0" colspan="2">
              <widget class="Line" name="line">
               <property name="orientation">
@@ -224,6 +288,17 @@
             </item>
             <item row="3" column="1">
              <widget class="QLabel" name="labelImmature">
+=======
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Unconfirmed:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="labelUnconfirmed">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               <property name="font">
                <font>
                 <weight>75</weight>
@@ -234,6 +309,7 @@
                <cursorShape>IBeamCursor</cursorShape>
               </property>
               <property name="toolTip">
+<<<<<<< HEAD
                <string>Mined balance that has not yet matured</string>
               </property>
               <property name="text">
@@ -241,12 +317,19 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+=======
+               <string>Total of transactions that have yet to be confirmed, and do not yet count toward the current balance</string>
+              </property>
+              <property name="text">
+               <string notr="true">0 LGBT</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
               <property name="textInteractionFlags">
                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
+<<<<<<< HEAD
             <item row="2" column="3">
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
@@ -261,12 +344,16 @@
              </spacer>
             </item>
             <item row="3" column="0">
+=======
+            <item row="2" column="0">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <widget class="QLabel" name="labelImmatureText">
               <property name="text">
                <string>Immature:</string>
               </property>
              </widget>
             </item>
+<<<<<<< HEAD
             <item row="5" column="1">
              <widget class="QLabel" name="labelTotal">
               <property name="font">
@@ -361,12 +448,17 @@
             </item>
             <item row="1" column="2">
              <widget class="QLabel" name="labelWatchAvailable">
+=======
+            <item row="2" column="1">
+             <widget class="QLabel" name="labelImmature">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               <property name="font">
                <font>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
+<<<<<<< HEAD
               <property name="cursor">
                <cursorShape>IBeamCursor</cursorShape>
               </property>
@@ -378,12 +470,20 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+=======
+              <property name="toolTip">
+               <string>Mined balance that has not yet matured</string>
+              </property>
+              <property name="text">
+               <string notr="true">0 LGBT</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
               <property name="textInteractionFlags">
                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
+<<<<<<< HEAD
             <item row="2" column="0">
              <widget class="QLabel" name="labelPendingText">
               <property name="text">
@@ -401,6 +501,8 @@
               </property>
              </widget>
             </item>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </layout>
           </item>
          </layout>
@@ -419,6 +521,28 @@
          </property>
         </spacer>
        </item>
+<<<<<<< HEAD
+=======
+      <item>
+         <widget class="QLabel" name="coinimage">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../bitcoin.qrc">:/icons/bitcoin</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="margin">
+           <number>-2</number>
+          </property>
+         </widget>
+        </item>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       </layout>
      </item>
      <item>
@@ -436,6 +560,7 @@
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
              <widget class="QLabel" name="label_4">
+<<<<<<< HEAD
               <property name="font">
                <font>
                 <weight>75</weight>
@@ -444,10 +569,15 @@
               </property>
               <property name="text">
                <string>Recent transactions</string>
+=======
+              <property name="text">
+               <string>&lt;b&gt;Recent transactions&lt;/b&gt;</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
              </widget>
             </item>
             <item>
+<<<<<<< HEAD
              <widget class="QPushButton" name="labelTransactionsStatus">
               <property name="enabled">
                <bool>true</bool>
@@ -477,6 +607,20 @@
               </property>
               <property name="flat">
                <bool>true</bool>
+=======
+             <widget class="QLabel" name="labelTransactionsStatus">
+              <property name="toolTip">
+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the rainbowcoin network after a connection is established, but this process has not completed yet.</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel { color: red; }</string>
+              </property>
+              <property name="text">
+               <string notr="true">(out of sync)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
               </property>
              </widget>
             </item>

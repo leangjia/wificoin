@@ -55,15 +55,23 @@ class FileState {
     }
     const uint64_t available = size_ - offset;
     if (n > available) {
+<<<<<<< HEAD
       n = static_cast<size_t>(available);
+=======
+      n = available;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     }
     if (n == 0) {
       *result = Slice();
       return Status::OK();
     }
 
+<<<<<<< HEAD
     assert(offset / kBlockSize <= SIZE_MAX);
     size_t block = static_cast<size_t>(offset / kBlockSize);
+=======
+    size_t block = offset / kBlockSize;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     size_t block_offset = offset % kBlockSize;
 
     if (n <= kBlockSize - block_offset) {
@@ -168,7 +176,11 @@ class SequentialFileImpl : public SequentialFile {
     if (pos_ > file_->Size()) {
       return Status::IOError("pos_ > file_->Size()");
     }
+<<<<<<< HEAD
     const uint64_t available = file_->Size() - pos_;
+=======
+    const size_t available = file_->Size() - pos_;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (n > available) {
       n = available;
     }
@@ -178,7 +190,11 @@ class SequentialFileImpl : public SequentialFile {
 
  private:
   FileState* file_;
+<<<<<<< HEAD
   uint64_t pos_;
+=======
+  size_t pos_;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 class RandomAccessFileImpl : public RandomAccessFile {
@@ -277,6 +293,7 @@ class InMemoryEnv : public EnvWrapper {
     return Status::OK();
   }
 
+<<<<<<< HEAD
   virtual Status NewAppendableFile(const std::string& fname,
                                    WritableFile** result) {
     MutexLock lock(&mutex_);
@@ -290,6 +307,8 @@ class InMemoryEnv : public EnvWrapper {
     return Status::OK();
   }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   virtual bool FileExists(const std::string& fname) {
     MutexLock lock(&mutex_);
     return file_map_.find(fname) != file_map_.end();

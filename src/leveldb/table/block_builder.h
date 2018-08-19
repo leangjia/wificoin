@@ -21,7 +21,11 @@ class BlockBuilder {
   // Reset the contents as if the BlockBuilder was just constructed.
   void Reset();
 
+<<<<<<< HEAD
   // REQUIRES: Finish() has not been called since the last call to Reset().
+=======
+  // REQUIRES: Finish() has not been callled since the last call to Reset().
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   // REQUIRES: key is larger than any previously added key
   void Add(const Slice& key, const Slice& value);
 

@@ -20,7 +20,11 @@
 #
 # The PLATFORM_CCFLAGS and PLATFORM_CXXFLAGS might include the following:
 #
+<<<<<<< HEAD
 #       -DLEVELDB_ATOMIC_PRESENT     if <atomic> is present
+=======
+#       -DLEVELDB_CSTDATOMIC_PRESENT if <cstdatomic> is present
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #       -DLEVELDB_PLATFORM_POSIX     for Posix-based platforms
 #       -DSNAPPY                     if the Snappy library is present
 #
@@ -63,7 +67,10 @@ PLATFORM_SHARED_EXT="so"
 PLATFORM_SHARED_LDFLAGS="-shared -Wl,-soname -Wl,"
 PLATFORM_SHARED_CFLAGS="-fPIC"
 PLATFORM_SHARED_VERSIONED=true
+<<<<<<< HEAD
 PLATFORM_SSEFLAGS=
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 MEMCMP_FLAG=
 if [ "$CXX" = "g++" ]; then
@@ -73,6 +80,7 @@ if [ "$CXX" = "g++" ]; then
 fi
 
 case "$TARGET_OS" in
+<<<<<<< HEAD
     CYGWIN_*)
         PLATFORM=OS_LINUX
         COMMON_FLAGS="$MEMCMP_FLAG -lpthread -DOS_LINUX -DCYGWIN"
@@ -80,6 +88,8 @@ case "$TARGET_OS" in
         PORT_FILE=port/port_posix.cc
         PORT_SSE_FILE=port/port_posix_sse.cc
         ;;
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     Darwin)
         PLATFORM=OS_MACOSX
         COMMON_FLAGS="$MEMCMP_FLAG -DOS_MACOSX"
@@ -87,28 +97,40 @@ case "$TARGET_OS" in
         [ -z "$INSTALL_PATH" ] && INSTALL_PATH=`pwd`
         PLATFORM_SHARED_LDFLAGS="-dynamiclib -install_name $INSTALL_PATH/"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     Linux)
         PLATFORM=OS_LINUX
         COMMON_FLAGS="$MEMCMP_FLAG -pthread -DOS_LINUX"
         PLATFORM_LDFLAGS="-pthread"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     SunOS)
         PLATFORM=OS_SOLARIS
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_SOLARIS"
         PLATFORM_LIBS="-lpthread -lrt"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     FreeBSD)
         PLATFORM=OS_FREEBSD
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_FREEBSD"
         PLATFORM_LIBS="-lpthread"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     GNU/kFreeBSD)
         PLATFORM=OS_KFREEBSD
@@ -121,28 +143,40 @@ case "$TARGET_OS" in
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_NETBSD"
         PLATFORM_LIBS="-lpthread -lgcc_s"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     OpenBSD)
         PLATFORM=OS_OPENBSD
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_OPENBSD"
         PLATFORM_LDFLAGS="-pthread"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     DragonFly)
         PLATFORM=OS_DRAGONFLYBSD
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_DRAGONFLYBSD"
         PLATFORM_LIBS="-lpthread"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ;;
     OS_ANDROID_CROSSCOMPILE)
         PLATFORM=OS_ANDROID
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_ANDROID -DLEVELDB_PLATFORM_POSIX"
         PLATFORM_LDFLAGS=""  # All pthread features are in the Android C library
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         CROSS_COMPILE=true
         ;;
     HP-UX)
@@ -150,6 +184,7 @@ case "$TARGET_OS" in
         COMMON_FLAGS="$MEMCMP_FLAG -D_REENTRANT -DOS_HPUX"
         PLATFORM_LDFLAGS="-pthread"
         PORT_FILE=port/port_posix.cc
+<<<<<<< HEAD
         PORT_SSE_FILE=port/port_posix_sse.cc
         # man ld: +h internal_name
         PLATFORM_SHARED_LDFLAGS="-shared -Wl,+h -Wl,"
@@ -165,6 +200,11 @@ case "$TARGET_OS" in
         PLATFORM_SHARED_CFLAGS=
         PLATFORM_SHARED_VERSIONED=
         ;;
+=======
+        # man ld: +h internal_name
+        PLATFORM_SHARED_LDFLAGS="-shared -Wl,+h -Wl,"
+        ;;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     OS_WINDOWS_CROSSCOMPILE | NATIVE_WINDOWS)
         PLATFORM=OS_WINDOWS
         COMMON_FLAGS="-fno-builtin-memcmp -D_REENTRANT -DOS_WINDOWS -DLEVELDB_PLATFORM_WINDOWS -DWINVER=0x0500 -D__USE_MINGW_ANSI_STDIO=1"
@@ -187,14 +227,22 @@ DIRS="$PREFIX/db $PREFIX/util $PREFIX/table"
 set -f # temporarily disable globbing so that our patterns aren't expanded
 PRUNE_TEST="-name *test*.cc -prune"
 PRUNE_BENCH="-name *_bench.cc -prune"
+<<<<<<< HEAD
 PRUNE_TOOL="-name leveldbutil.cc -prune"
+=======
+PRUNE_TOOL="-name leveldb_main.cc -prune"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 PORTABLE_FILES=`find $DIRS $PRUNE_TEST -o $PRUNE_BENCH -o $PRUNE_TOOL -o -name '*.cc' -print | sort | sed "s,^$PREFIX/,," | tr "\n" " "`
 
 set +f # re-enable globbing
 
 # The sources consist of the portable files, plus the platform-specific port
 # file.
+<<<<<<< HEAD
 echo "SOURCES=$PORTABLE_FILES $PORT_FILE $PORT_SSE_FILE" >> $OUTPUT
+=======
+echo "SOURCES=$PORTABLE_FILES $PORT_FILE" >> $OUTPUT
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 echo "MEMENV_SOURCES=helpers/memenv/memenv.cc" >> $OUTPUT
 
 if [ "$CROSS_COMPILE" = "true" ]; then
@@ -203,6 +251,7 @@ if [ "$CROSS_COMPILE" = "true" ]; then
 else
     CXXOUTPUT="${TMPDIR}/leveldb_build_detect_platform-cxx.$$"
 
+<<<<<<< HEAD
     # If -std=c++0x works, use <atomic> as fallback for when memory barriers
     # are not available.
     $CXX $CXXFLAGS -std=c++0x -x c++ - -o $CXXOUTPUT 2>/dev/null  <<EOF
@@ -211,6 +260,15 @@ else
 EOF
     if [ "$?" = 0 ]; then
         COMMON_FLAGS="$COMMON_FLAGS -DLEVELDB_PLATFORM_POSIX -DLEVELDB_ATOMIC_PRESENT"
+=======
+    # If -std=c++0x works, use <cstdatomic>.  Otherwise use port_posix.h.
+    $CXX $CXXFLAGS -std=c++0x -x c++ - -o $CXXOUTPUT 2>/dev/null  <<EOF
+      #include <cstdatomic>
+      int main() {}
+EOF
+    if [ "$?" = 0 ]; then
+        COMMON_FLAGS="$COMMON_FLAGS -DLEVELDB_PLATFORM_POSIX -DLEVELDB_CSTDATOMIC_PRESENT"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         PLATFORM_CXXFLAGS="-std=c++0x"
     else
         COMMON_FLAGS="$COMMON_FLAGS -DLEVELDB_PLATFORM_POSIX"
@@ -225,6 +283,7 @@ EOF
     fi
 
     rm -f $CXXOUTPUT 2>/dev/null
+<<<<<<< HEAD
 
     # Test if gcc SSE 4.2 is supported
     $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -msse4.2 2>/dev/null  <<EOF
@@ -240,6 +299,8 @@ fi
 # Use the SSE 4.2 CRC32C intrinsics iff runtime checks indicate compiler supports them.
 if [ -n "$PLATFORM_SSEFLAGS" ]; then
     PLATFORM_SSEFLAGS="$PLATFORM_SSEFLAGS -DLEVELDB_PLATFORM_POSIX_SSE"
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 fi
 
 PLATFORM_CCFLAGS="$PLATFORM_CCFLAGS $COMMON_FLAGS"
@@ -252,7 +313,10 @@ echo "PLATFORM_LDFLAGS=$PLATFORM_LDFLAGS" >> $OUTPUT
 echo "PLATFORM_LIBS=$PLATFORM_LIBS" >> $OUTPUT
 echo "PLATFORM_CCFLAGS=$PLATFORM_CCFLAGS" >> $OUTPUT
 echo "PLATFORM_CXXFLAGS=$PLATFORM_CXXFLAGS" >> $OUTPUT
+<<<<<<< HEAD
 echo "PLATFORM_SSEFLAGS=$PLATFORM_SSEFLAGS" >> $OUTPUT
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 echo "PLATFORM_SHARED_CFLAGS=$PLATFORM_SHARED_CFLAGS" >> $OUTPUT
 echo "PLATFORM_SHARED_EXT=$PLATFORM_SHARED_EXT" >> $OUTPUT
 echo "PLATFORM_SHARED_LDFLAGS=$PLATFORM_SHARED_LDFLAGS" >> $OUTPUT

@@ -57,11 +57,16 @@ void DelayMilliseconds(int millis) {
 // Special Env used to delay background operations
 class SpecialEnv : public EnvWrapper {
  public:
+<<<<<<< HEAD
   // sstable/log Sync() calls are blocked while this pointer is non-NULL.
   port::AtomicPointer delay_data_sync_;
 
   // sstable/log Sync() calls return an error.
   port::AtomicPointer data_sync_error_;
+=======
+  // sstable Sync() calls are blocked while this pointer is non-NULL.
+  port::AtomicPointer delay_sstable_sync_;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   // Simulate no-space errors while this pointer is non-NULL.
   port::AtomicPointer no_space_;
@@ -78,9 +83,17 @@ class SpecialEnv : public EnvWrapper {
   bool count_random_reads_;
   AtomicCounter random_read_counter_;
 
+<<<<<<< HEAD
   explicit SpecialEnv(Env* base) : EnvWrapper(base) {
     delay_data_sync_.Release_Store(NULL);
     data_sync_error_.Release_Store(NULL);
+=======
+  AtomicCounter sleep_counter_;
+  AtomicCounter sleep_time_counter_;
+
+  explicit SpecialEnv(Env* base) : EnvWrapper(base) {
+    delay_sstable_sync_.Release_Store(NULL);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     no_space_.Release_Store(NULL);
     non_writable_.Release_Store(NULL);
     count_random_reads_ = false;
@@ -89,17 +102,29 @@ class SpecialEnv : public EnvWrapper {
   }
 
   Status NewWritableFile(const std::string& f, WritableFile** r) {
+<<<<<<< HEAD
     class DataFile : public WritableFile {
+=======
+    class SSTableFile : public WritableFile {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      private:
       SpecialEnv* env_;
       WritableFile* base_;
 
      public:
+<<<<<<< HEAD
       DataFile(SpecialEnv* env, WritableFile* base)
           : env_(env),
             base_(base) {
       }
       ~DataFile() { delete base_; }
+=======
+      SSTableFile(SpecialEnv* env, WritableFile* base)
+          : env_(env),
+            base_(base) {
+      }
+      ~SSTableFile() { delete base_; }
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       Status Append(const Slice& data) {
         if (env_->no_space_.Acquire_Load() != NULL) {
           // Drop writes on the floor
@@ -111,10 +136,14 @@ class SpecialEnv : public EnvWrapper {
       Status Close() { return base_->Close(); }
       Status Flush() { return base_->Flush(); }
       Status Sync() {
+<<<<<<< HEAD
         if (env_->data_sync_error_.Acquire_Load() != NULL) {
           return Status::IOError("simulated data sync error");
         }
         while (env_->delay_data_sync_.Acquire_Load() != NULL) {
+=======
+        while (env_->delay_sstable_sync_.Acquire_Load() != NULL) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
           DelayMilliseconds(100);
         }
         return base_->Sync();
@@ -151,9 +180,14 @@ class SpecialEnv : public EnvWrapper {
 
     Status s = target()->NewWritableFile(f, r);
     if (s.ok()) {
+<<<<<<< HEAD
       if (strstr(f.c_str(), ".ldb") != NULL ||
           strstr(f.c_str(), ".log") != NULL) {
         *r = new DataFile(this, *r);
+=======
+      if (strstr(f.c_str(), ".sst") != NULL) {
+        *r = new SSTableFile(this, *r);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       } else if (strstr(f.c_str(), "MANIFEST") != NULL) {
         *r = new ManifestFile(this, *r);
       }
@@ -184,6 +218,15 @@ class SpecialEnv : public EnvWrapper {
     }
     return s;
   }
+<<<<<<< HEAD
+=======
+
+  virtual void SleepForMicroseconds(int micros) {
+    sleep_counter_.Increment();
+    sleep_time_counter_.IncrementBy(micros);
+  }
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 class DBTest {
@@ -193,7 +236,10 @@ class DBTest {
   // Sequence of option configurations to try
   enum OptionConfig {
     kDefault,
+<<<<<<< HEAD
     kReuse,
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     kFilter,
     kUncompressed,
     kEnd
@@ -238,11 +284,15 @@ class DBTest {
   // Return the current option configuration.
   Options CurrentOptions() {
     Options options;
+<<<<<<< HEAD
     options.reuse_logs = false;
     switch (option_config_) {
       case kReuse:
         options.reuse_logs = true;
         break;
+=======
+    switch (option_config_) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       case kFilter:
         options.filter_policy = filter_policy_;
         break;
@@ -326,7 +376,11 @@ class DBTest {
     }
 
     // Check reverse iteration results are the reverse of forward results
+<<<<<<< HEAD
     size_t matched = 0;
+=======
+    int matched = 0;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     for (iter->SeekToLast(); iter->Valid(); iter->Prev()) {
       ASSERT_LT(matched, forward.size());
       ASSERT_EQ(IterStatus(iter), forward[forward.size() - matched - 1]);
@@ -488,6 +542,7 @@ class DBTest {
     }
     return false;
   }
+<<<<<<< HEAD
 
   // Returns number of files renamed.
   int RenameLDBToSST() {
@@ -506,6 +561,8 @@ class DBTest {
     }
     return files_renamed;
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 TEST(DBTest, Empty) {
@@ -547,11 +604,19 @@ TEST(DBTest, GetFromImmutableLayer) {
     ASSERT_OK(Put("foo", "v1"));
     ASSERT_EQ("v1", Get("foo"));
 
+<<<<<<< HEAD
     env_->delay_data_sync_.Release_Store(env_);      // Block sync calls
     Put("k1", std::string(100000, 'x'));             // Fill memtable
     Put("k2", std::string(100000, 'y'));             // Trigger compaction
     ASSERT_EQ("v1", Get("foo"));
     env_->delay_data_sync_.Release_Store(NULL);      // Release sync calls
+=======
+    env_->delay_sstable_sync_.Release_Store(env_);   // Block sync calls
+    Put("k1", std::string(100000, 'x'));             // Fill memtable
+    Put("k2", std::string(100000, 'y'));             // Trigger compaction
+    ASSERT_EQ("v1", Get("foo"));
+    env_->delay_sstable_sync_.Release_Store(NULL);   // Release sync calls
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   } while (ChangeOptions());
 }
 
@@ -563,6 +628,7 @@ TEST(DBTest, GetFromVersions) {
   } while (ChangeOptions());
 }
 
+<<<<<<< HEAD
 TEST(DBTest, GetMemUsage) {
   do {
     ASSERT_OK(Put("foo", "v1"));
@@ -574,6 +640,8 @@ TEST(DBTest, GetMemUsage) {
   } while (ChangeOptions());
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 TEST(DBTest, GetSnapshot) {
   do {
     // Try with both a short key and a long key
@@ -642,7 +710,11 @@ TEST(DBTest, GetEncountersEmptyLevel) {
     //   * sstable B in level 2
     // Then do enough Get() calls to arrange for an automatic compaction
     // of sstable A.  A bug would cause the compaction to be marked as
+<<<<<<< HEAD
     // occurring at level 1 (instead of the correct level 0).
+=======
+    // occuring at level 1 (instead of the correct level 0).
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     // Step 1: First place sstables in levels 0 and 2
     int compaction_count = 0;
@@ -1096,6 +1168,7 @@ TEST(DBTest, ApproximateSizes) {
     // 0 because GetApproximateSizes() does not account for memtable space
     ASSERT_TRUE(Between(Size("", Key(50)), 0, 0));
 
+<<<<<<< HEAD
     if (options.reuse_logs) {
       // Recovery will reuse memtable, and GetApproximateSizes() does not
       // account for memtable usage;
@@ -1104,6 +1177,8 @@ TEST(DBTest, ApproximateSizes) {
       continue;
     }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     // Check sizes across recovery by reopening a few times
     for (int run = 0; run < 3; run++) {
       Reopen(&options);
@@ -1147,11 +1222,14 @@ TEST(DBTest, ApproximateSizes_MixOfSmallAndLarge) {
     ASSERT_OK(Put(Key(6), RandomString(&rnd, 300000)));
     ASSERT_OK(Put(Key(7), RandomString(&rnd, 10000)));
 
+<<<<<<< HEAD
     if (options.reuse_logs) {
       // Need to force a memtable compaction since recovery does not do so.
       ASSERT_OK(dbfull()->TEST_CompactMemTable());
     }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     // Check sizes across recovery by reopening a few times
     for (int run = 0; run < 3; run++) {
       Reopen(&options);
@@ -1562,13 +1640,48 @@ TEST(DBTest, NoSpace) {
   Compact("a", "z");
   const int num_files = CountFiles();
   env_->no_space_.Release_Store(env_);   // Force out-of-space errors
+<<<<<<< HEAD
   for (int i = 0; i < 10; i++) {
+=======
+  env_->sleep_counter_.Reset();
+  for (int i = 0; i < 5; i++) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     for (int level = 0; level < config::kNumLevels-1; level++) {
       dbfull()->TEST_CompactRange(level, NULL, NULL);
     }
   }
   env_->no_space_.Release_Store(NULL);
   ASSERT_LT(CountFiles(), num_files + 3);
+<<<<<<< HEAD
+=======
+
+  // Check that compaction attempts slept after errors
+  ASSERT_GE(env_->sleep_counter_.Read(), 5);
+}
+
+TEST(DBTest, ExponentialBackoff) {
+  Options options = CurrentOptions();
+  options.env = env_;
+  Reopen(&options);
+
+  ASSERT_OK(Put("foo", "v1"));
+  ASSERT_EQ("v1", Get("foo"));
+  Compact("a", "z");
+  env_->non_writable_.Release_Store(env_);  // Force errors for new files
+  env_->sleep_counter_.Reset();
+  env_->sleep_time_counter_.Reset();
+  for (int i = 0; i < 5; i++) {
+    dbfull()->TEST_CompactRange(2, NULL, NULL);
+  }
+  env_->non_writable_.Release_Store(NULL);
+
+  // Wait for compaction to finish
+  DelayMilliseconds(1000);
+
+  ASSERT_GE(env_->sleep_counter_.Read(), 5);
+  ASSERT_LT(env_->sleep_counter_.Read(), 10);
+  ASSERT_GE(env_->sleep_time_counter_.Read(), 10e6);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 TEST(DBTest, NonWritableFileSystem) {
@@ -1591,6 +1704,7 @@ TEST(DBTest, NonWritableFileSystem) {
   env_->non_writable_.Release_Store(NULL);
 }
 
+<<<<<<< HEAD
 TEST(DBTest, WriteSyncError) {
   // Check that log sync errors cause the DB to disallow future writes.
 
@@ -1622,6 +1736,8 @@ TEST(DBTest, WriteSyncError) {
   ASSERT_EQ("NOT_FOUND", Get("k3"));
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 TEST(DBTest, ManifestWriteError) {
   // Test for the following problem:
   // (a) Compaction produces file F
@@ -1681,6 +1797,7 @@ TEST(DBTest, MissingSSTFile) {
       << s.ToString();
 }
 
+<<<<<<< HEAD
 TEST(DBTest, StillReadSST) {
   ASSERT_OK(Put("foo", "bar"));
   ASSERT_EQ("bar", Get("foo"));
@@ -1697,6 +1814,8 @@ TEST(DBTest, StillReadSST) {
   ASSERT_EQ("bar", Get("foo"));
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 TEST(DBTest, FilesDeletedAfterCompaction) {
   ASSERT_OK(Put("foo", "v2"));
   Compact("a", "z");
@@ -1728,7 +1847,11 @@ TEST(DBTest, BloomFilter) {
   dbfull()->TEST_CompactMemTable();
 
   // Prevent auto compactions triggered by seeks
+<<<<<<< HEAD
   env_->delay_data_sync_.Release_Store(env_);
+=======
+  env_->delay_sstable_sync_.Release_Store(env_);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   // Lookup present keys.  Should rarely read from small sstable.
   env_->random_read_counter_.Reset();
@@ -1749,7 +1872,11 @@ TEST(DBTest, BloomFilter) {
   fprintf(stderr, "%d missing => %d reads\n", N, reads);
   ASSERT_LE(reads, 3*N/100);
 
+<<<<<<< HEAD
   env_->delay_data_sync_.Release_Store(NULL);
+=======
+  env_->delay_sstable_sync_.Release_Store(NULL);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   Close();
   delete options.block_cache;
   delete options.filter_policy;
@@ -1809,7 +1936,11 @@ static void MTThreadBody(void* arg) {
         ASSERT_EQ(k, key);
         ASSERT_GE(w, 0);
         ASSERT_LT(w, kNumThreads);
+<<<<<<< HEAD
         ASSERT_LE(static_cast<uintptr_t>(c), reinterpret_cast<uintptr_t>(
+=======
+        ASSERT_LE(c, reinterpret_cast<uintptr_t>(
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
             t->state->counter[w].Acquire_Load()));
       }
     }
@@ -2113,8 +2244,12 @@ void BM_LogAndApply(int iters, int num_base_files) {
   InternalKeyComparator cmp(BytewiseComparator());
   Options options;
   VersionSet vset(dbname, &options, NULL, &cmp);
+<<<<<<< HEAD
   bool save_manifest;
   ASSERT_OK(vset.Recover(&save_manifest));
+=======
+  ASSERT_OK(vset.Recover());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   VersionEdit vbase;
   uint64_t fnum = 1;
   for (int i = 0; i < num_base_files; i++) {

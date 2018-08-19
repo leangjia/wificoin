@@ -129,6 +129,7 @@ extern bool Snappy_Uncompress(const char* input_data, size_t input_length,
 // The concatenation of all "data[0,n-1]" fragments is the heap profile.
 extern bool GetHeapProfile(void (*func)(void*, const char*, int), void* arg);
 
+<<<<<<< HEAD
 // Determine whether a working accelerated crc32 implementation exists
 // Returns true if AcceleratedCRC32C is safe to call
 bool HasAcceleratedCRC32C();
@@ -139,6 +140,8 @@ bool HasAcceleratedCRC32C();
 // the newly extended CRC value (which may also be zero).
 uint32_t AcceleratedCRC32C(uint32_t crc, const char* buf, size_t size);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }  // namespace port
 }  // namespace leveldb
 

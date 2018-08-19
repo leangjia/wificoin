@@ -250,7 +250,11 @@ class ConcurrentTest {
         // Note that generation 0 is never inserted, so it is ok if
         // <*,0,*> is missing.
         ASSERT_TRUE((gen(pos) == 0) ||
+<<<<<<< HEAD
                     (gen(pos) > static_cast<Key>(initial_state.Get(key(pos))))
+=======
+                    (gen(pos) > initial_state.Get(key(pos)))
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
                     ) << "key: " << key(pos)
                       << "; gen: " << gen(pos)
                       << "; initgen: "

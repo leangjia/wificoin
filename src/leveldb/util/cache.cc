@@ -19,6 +19,7 @@ Cache::~Cache() {
 namespace {
 
 // LRU cache implementation
+<<<<<<< HEAD
 //
 // Cache entries have an "in_cache" boolean indicating whether the cache has a
 // reference on the entry.  The only ways that this can become false without the
@@ -36,6 +37,8 @@ namespace {
 // Elements are moved between these lists by the Ref() and Unref() methods,
 // when they detect an element in the cache acquiring or losing its only
 // external reference.
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 // An entry is a variable length heap-allocated structure.  Entries
 // are kept in a circular doubly linked list ordered by access time.
@@ -47,8 +50,12 @@ struct LRUHandle {
   LRUHandle* prev;
   size_t charge;      // TODO(opt): Only allow uint32_t?
   size_t key_length;
+<<<<<<< HEAD
   bool in_cache;      // Whether entry is in the cache.
   uint32_t refs;      // References, including cache reference, if present.
+=======
+  uint32_t refs;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   uint32_t hash;      // Hash of key(); used for fast sharding and comparisons
   char key_data[1];   // Beginning of key
 
@@ -165,6 +172,7 @@ class LRUCache {
   Cache::Handle* Lookup(const Slice& key, uint32_t hash);
   void Release(Cache::Handle* handle);
   void Erase(const Slice& key, uint32_t hash);
+<<<<<<< HEAD
   void Prune();
   size_t TotalCharge() const {
     MutexLock l(&mutex_);
@@ -177,16 +185,28 @@ class LRUCache {
   void Ref(LRUHandle* e);
   void Unref(LRUHandle* e);
   bool FinishErase(LRUHandle* e);
+=======
+
+ private:
+  void LRU_Remove(LRUHandle* e);
+  void LRU_Append(LRUHandle* e);
+  void Unref(LRUHandle* e);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   // Initialized before use.
   size_t capacity_;
 
   // mutex_ protects the following state.
+<<<<<<< HEAD
   mutable port::Mutex mutex_;
+=======
+  port::Mutex mutex_;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   size_t usage_;
 
   // Dummy head of LRU list.
   // lru.prev is newest entry, lru.next is oldest entry.
+<<<<<<< HEAD
   // Entries have refs==1 and in_cache==true.
   LRUHandle lru_;
 
@@ -194,11 +214,16 @@ class LRUCache {
   // Entries are in use by clients, and have refs >= 2 and in_cache==true.
   LRUHandle in_use_;
 
+=======
+  LRUHandle lru_;
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   HandleTable table_;
 };
 
 LRUCache::LRUCache()
     : usage_(0) {
+<<<<<<< HEAD
   // Make empty circular linked lists.
   lru_.next = &lru_;
   lru_.prev = &lru_;
@@ -213,11 +238,23 @@ LRUCache::~LRUCache() {
     assert(e->in_cache);
     e->in_cache = false;
     assert(e->refs == 1);  // Invariant of lru_ list.
+=======
+  // Make empty circular linked list
+  lru_.next = &lru_;
+  lru_.prev = &lru_;
+}
+
+LRUCache::~LRUCache() {
+  for (LRUHandle* e = lru_.next; e != &lru_; ) {
+    LRUHandle* next = e->next;
+    assert(e->refs == 1);  // Error if caller has an unreleased handle
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     Unref(e);
     e = next;
   }
 }
 
+<<<<<<< HEAD
 void LRUCache::Ref(LRUHandle* e) {
   if (e->refs == 1 && e->in_cache) {  // If on lru_ list, move to in_use_ list.
     LRU_Remove(e);
@@ -236,6 +273,15 @@ void LRUCache::Unref(LRUHandle* e) {
   } else if (e->in_cache && e->refs == 1) {  // No longer in use; move to lru_ list.
     LRU_Remove(e);
     LRU_Append(&lru_, e);
+=======
+void LRUCache::Unref(LRUHandle* e) {
+  assert(e->refs > 0);
+  e->refs--;
+  if (e->refs <= 0) {
+    usage_ -= e->charge;
+    (*e->deleter)(e->key(), e->value);
+    free(e);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 }
 
@@ -244,10 +290,17 @@ void LRUCache::LRU_Remove(LRUHandle* e) {
   e->prev->next = e->next;
 }
 
+<<<<<<< HEAD
 void LRUCache::LRU_Append(LRUHandle* list, LRUHandle* e) {
   // Make "e" newest entry by inserting just before *list
   e->next = list;
   e->prev = list->prev;
+=======
+void LRUCache::LRU_Append(LRUHandle* e) {
+  // Make "e" newest entry by inserting just before lru_
+  e->next = &lru_;
+  e->prev = lru_.prev;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   e->prev->next = e;
   e->next->prev = e;
 }
@@ -256,7 +309,13 @@ Cache::Handle* LRUCache::Lookup(const Slice& key, uint32_t hash) {
   MutexLock l(&mutex_);
   LRUHandle* e = table_.Lookup(key, hash);
   if (e != NULL) {
+<<<<<<< HEAD
     Ref(e);
+=======
+    e->refs++;
+    LRU_Remove(e);
+    LRU_Append(e);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
   return reinterpret_cast<Cache::Handle*>(e);
 }
@@ -278,6 +337,7 @@ Cache::Handle* LRUCache::Insert(
   e->charge = charge;
   e->key_length = key.size();
   e->hash = hash;
+<<<<<<< HEAD
   e->in_cache = false;
   e->refs = 1;  // for the returned handle.
   memcpy(e->key_data, key.data(), key.size());
@@ -297,11 +357,30 @@ Cache::Handle* LRUCache::Insert(
     if (!erased) {  // to avoid unused variable when compiled NDEBUG
       assert(erased);
     }
+=======
+  e->refs = 2;  // One from LRUCache, one for the returned handle
+  memcpy(e->key_data, key.data(), key.size());
+  LRU_Append(e);
+  usage_ += charge;
+
+  LRUHandle* old = table_.Insert(e);
+  if (old != NULL) {
+    LRU_Remove(old);
+    Unref(old);
+  }
+
+  while (usage_ > capacity_ && lru_.next != &lru_) {
+    LRUHandle* old = lru_.next;
+    LRU_Remove(old);
+    table_.Remove(old->key(), old->hash);
+    Unref(old);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
   return reinterpret_cast<Cache::Handle*>(e);
 }
 
+<<<<<<< HEAD
 // If e != NULL, finish removing *e from the cache; it has already been removed
 // from the hash table.  Return whether e != NULL.  Requires mutex_ held.
 bool LRUCache::FinishErase(LRUHandle* e) {
@@ -330,6 +409,15 @@ void LRUCache::Prune() {
       assert(erased);
     }
   }
+=======
+void LRUCache::Erase(const Slice& key, uint32_t hash) {
+  MutexLock l(&mutex_);
+  LRUHandle* e = table_.Remove(key, hash);
+  if (e != NULL) {
+    LRU_Remove(e);
+    Unref(e);
+  }
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 static const int kNumShardBits = 4;
@@ -382,6 +470,7 @@ class ShardedLRUCache : public Cache {
     MutexLock l(&id_mutex_);
     return ++(last_id_);
   }
+<<<<<<< HEAD
   virtual void Prune() {
     for (int s = 0; s < kNumShards; s++) {
       shard_[s].Prune();
@@ -394,6 +483,8 @@ class ShardedLRUCache : public Cache {
     }
     return total;
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 }  // end anonymous namespace

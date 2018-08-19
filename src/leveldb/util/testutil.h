@@ -24,7 +24,11 @@ extern std::string RandomKey(Random* rnd, int len);
 // "N*compressed_fraction" bytes and return a Slice that references
 // the generated data.
 extern Slice CompressibleString(Random* rnd, double compressed_fraction,
+<<<<<<< HEAD
                                 size_t len, std::string* dst);
+=======
+                                int len, std::string* dst);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 // A wrapper that allows injection of errors.
 class ErrorEnv : public EnvWrapper {
@@ -45,6 +49,7 @@ class ErrorEnv : public EnvWrapper {
     }
     return target()->NewWritableFile(fname, result);
   }
+<<<<<<< HEAD
 
   virtual Status NewAppendableFile(const std::string& fname,
                                    WritableFile** result) {
@@ -55,6 +60,8 @@ class ErrorEnv : public EnvWrapper {
     }
     return target()->NewAppendableFile(fname, result);
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 }  // namespace test

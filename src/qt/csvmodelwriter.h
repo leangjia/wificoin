@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2014 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -7,6 +8,13 @@
 
 #include <QList>
 #include <QObject>
+=======
+#ifndef CSVMODELWRITER_H
+#define CSVMODELWRITER_H
+
+#include <QObject>
+#include <QList>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
@@ -43,4 +51,8 @@ private:
     QList<Column> columns;
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_CSVMODELWRITER_H
+=======
+#endif // CSVMODELWRITER_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

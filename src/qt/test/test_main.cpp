@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -45,10 +46,17 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 #endif
 
 extern void noui_connect();
+=======
+#include <QTest>
+#include <QObject>
+
+#include "uritests.h"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 // This is all you need to run all the tests
 int main(int argc, char *argv[])
 {
+<<<<<<< HEAD
     SetupEnvironment();
     SetupNetworking();
     SelectParams(CBaseChainParams::MAIN);
@@ -102,6 +110,13 @@ int main(int argc, char *argv[])
 #endif
 
     fs::remove_all(pathTemp);
+=======
+    bool fInvalid = false;
+
+    URITests test1;
+    if (QTest::qExec(&test1) != 0)
+        fInvalid = true;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     return fInvalid;
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -169,6 +170,18 @@ BOOST_AUTO_TEST_CASE(doubles)
         BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
     }
 }
+=======
+#include <boost/test/unit_test.hpp>
+
+#include <string>
+#include <vector>
+
+#include "serialize.h"
+
+using namespace std;
+
+BOOST_AUTO_TEST_SUITE(serialize_tests)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 BOOST_AUTO_TEST_CASE(varints)
 {
@@ -182,7 +195,11 @@ BOOST_AUTO_TEST_CASE(varints)
         BOOST_CHECK(size == ss.size());
     }
 
+<<<<<<< HEAD
     for (uint64_t i = 0;  i < 100000000000ULL; i += 999999937) {
+=======
+    for (uint64 i = 0;  i < 100000000000ULL; i += 999999937) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         ss << VARINT(i);
         size += ::GetSerializeSize(VARINT(i), 0, 0);
         BOOST_CHECK(size == ss.size());
@@ -195,6 +212,7 @@ BOOST_AUTO_TEST_CASE(varints)
         BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
     }
 
+<<<<<<< HEAD
     for (uint64_t i = 0;  i < 100000000000ULL; i += 999999937) {
         uint64_t j = -1;
         ss >> VARINT(j);
@@ -363,6 +381,14 @@ BOOST_AUTO_TEST_CASE(class_methods)
     CDataStream ss2(SER_DISK, PROTOCOL_VERSION, intval, boolval, stringval, FLATDATA(charstrval), txval);
     ss2 >> methodtest3;
     BOOST_CHECK(methodtest3 == methodtest4);
+=======
+    for (uint64 i = 0;  i < 100000000000ULL; i += 999999937) {
+        uint64 j = -1;
+        ss >> VARINT(j);
+        BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
+    }
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 BOOST_AUTO_TEST_SUITE_END()

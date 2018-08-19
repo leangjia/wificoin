@@ -10,23 +10,33 @@
 namespace leveldb {
 
 static const int kDelayMicros = 100000;
+<<<<<<< HEAD
 static const int kReadOnlyFileLimit = 4;
 static const int kMMapLimit = 4;
 
 class EnvTest {
+=======
+
+class EnvPosixTest {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  private:
   port::Mutex mu_;
   std::string events_;
 
  public:
   Env* env_;
+<<<<<<< HEAD
   EnvTest() : env_(Env::Default()) { }
+=======
+  EnvPosixTest() : env_(Env::Default()) { }
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 };
 
 static void SetBool(void* ptr) {
   reinterpret_cast<port::AtomicPointer*>(ptr)->NoBarrier_Store(ptr);
 }
 
+<<<<<<< HEAD
 TEST(EnvTest, RunImmediately) {
   port::AtomicPointer called (NULL);
   env_->Schedule(&SetBool, &called);
@@ -35,6 +45,16 @@ TEST(EnvTest, RunImmediately) {
 }
 
 TEST(EnvTest, RunMany) {
+=======
+TEST(EnvPosixTest, RunImmediately) {
+  port::AtomicPointer called (NULL);
+  env_->Schedule(&SetBool, &called);
+  Env::Default()->SleepForMicroseconds(kDelayMicros);
+  ASSERT_TRUE(called.NoBarrier_Load() != NULL);
+}
+
+TEST(EnvPosixTest, RunMany) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   port::AtomicPointer last_id (NULL);
 
   struct CB {
@@ -61,7 +81,11 @@ TEST(EnvTest, RunMany) {
   env_->Schedule(&CB::Run, &cb3);
   env_->Schedule(&CB::Run, &cb4);
 
+<<<<<<< HEAD
   env_->SleepForMicroseconds(kDelayMicros);
+=======
+  Env::Default()->SleepForMicroseconds(kDelayMicros);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   void* cur = last_id.Acquire_Load();
   ASSERT_EQ(4, reinterpret_cast<uintptr_t>(cur));
 }
@@ -80,7 +104,11 @@ static void ThreadBody(void* arg) {
   s->mu.Unlock();
 }
 
+<<<<<<< HEAD
 TEST(EnvTest, StartThread) {
+=======
+TEST(EnvPosixTest, StartThread) {
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   State state;
   state.val = 0;
   state.num_running = 3;
@@ -94,7 +122,11 @@ TEST(EnvTest, StartThread) {
     if (num == 0) {
       break;
     }
+<<<<<<< HEAD
     env_->SleepForMicroseconds(kDelayMicros);
+=======
+    Env::Default()->SleepForMicroseconds(kDelayMicros);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
   ASSERT_EQ(state.val, 3);
 }

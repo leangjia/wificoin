@@ -161,6 +161,7 @@ void DBIter::Next() {
       saved_key_.clear();
       return;
     }
+<<<<<<< HEAD
     // saved_key_ already contains the key to skip past.
   } else {
     // Store in saved_key_ the current key so we skip it below.
@@ -168,6 +169,14 @@ void DBIter::Next() {
   }
 
   FindNextUserEntry(true, &saved_key_);
+=======
+  }
+
+  // Temporarily use saved_key_ as storage for key to skip.
+  std::string* skip = &saved_key_;
+  SaveKey(ExtractUserKey(iter_->key()), skip);
+  FindNextUserEntry(true, skip);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 void DBIter::FindNextUserEntry(bool skipping, std::string* skip) {

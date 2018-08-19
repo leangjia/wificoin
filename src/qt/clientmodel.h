@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -17,6 +18,20 @@ class PeerTableModel;
 class CBlockIndex;
 
 QT_BEGIN_NAMESPACE
+=======
+#ifndef CLIENTMODEL_H
+#define CLIENTMODEL_H
+
+#include <QObject>
+
+class OptionsModel;
+class AddressTableModel;
+class TransactionTableModel;
+class CWallet;
+
+QT_BEGIN_NAMESPACE
+class QDateTime;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 class QTimer;
 QT_END_NAMESPACE
 
@@ -27,6 +42,7 @@ enum BlockSource {
     BLOCK_SOURCE_NETWORK
 };
 
+<<<<<<< HEAD
 enum NumConnections {
     CONNECTIONS_NONE = 0,
     CONNECTIONS_IN   = (1U << 0),
@@ -35,6 +51,9 @@ enum NumConnections {
 };
 
 /** Model for WiFicoin network client. */
+=======
+/** Model for Bitcoin network client. */
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 class ClientModel : public QObject
 {
     Q_OBJECT
@@ -44,6 +63,7 @@ public:
     ~ClientModel();
 
     OptionsModel *getOptionsModel();
+<<<<<<< HEAD
     PeerTableModel *getPeerTableModel();
     BanTableModel *getBanTableModel();
 
@@ -71,10 +91,29 @@ public:
     bool getNetworkActive() const;
     //! Toggle network activity state in core
     void setNetworkActive(bool active);
+=======
+
+    int getNumConnections() const;
+    int getNumBlocks() const;
+    int getNumBlocksAtStartup();
+
+    double getVerificationProgress() const;
+    QDateTime getLastBlockDate() const;
+
+    //! Return true if client connected to testnet
+    bool isTestNet() const;
+    //! Return true if core is doing initial block download
+    bool inInitialBlockDownload() const;
+    //! Return true if core is importing blocks
+    enum BlockSource getBlockSource() const;
+    //! Return conservative estimate of total number of blocks, or 0 if unknown
+    int getNumBlocksOfPeers() const;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
 
     QString formatFullVersion() const;
+<<<<<<< HEAD
     QString formatSubVersion() const;
     bool isReleaseVersion() const;
     QString formatClientStartupTime() const;
@@ -88,12 +127,29 @@ private:
     OptionsModel *optionsModel;
     PeerTableModel *peerTableModel;
     BanTableModel *banTableModel;
+=======
+    QString formatBuildDate() const;
+    bool isReleaseVersion() const;
+    QString clientName() const;
+    QString formatClientStartupTime() const;
+
+private:
+    OptionsModel *optionsModel;
+
+    int cachedNumBlocks;
+    int cachedNumBlocksOfPeers;
+	bool cachedReindexing;
+	bool cachedImporting;
+
+    int numBlocksAtStartup;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     QTimer *pollTimer;
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();
 
+<<<<<<< HEAD
 Q_SIGNALS:
     void numConnectionsChanged(int count);
     void numBlocksChanged(int count, const QDateTime& blockDate, double nVerificationProgress, bool header);
@@ -117,3 +173,20 @@ public Q_SLOTS:
 };
 
 #endif // WIFICOIN_QT_CLIENTMODEL_H
+=======
+signals:
+    void numConnectionsChanged(int count);
+    void numBlocksChanged(int count, int countOfPeers);
+    void alertsChanged(const QString &warnings);
+
+    //! Asynchronous message notification
+    void message(const QString &title, const QString &message, unsigned int style);
+
+public slots:
+    void updateTimer();
+    void updateNumConnections(int numConnections);
+    void updateAlert(const QString &hash, int status);
+};
+
+#endif // CLIENTMODEL_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

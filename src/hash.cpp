@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2013-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -9,6 +10,11 @@
 
 
 inline uint32_t ROTL32(uint32_t x, int8_t r)
+=======
+#include "hash.h"
+
+inline uint32_t ROTL32 ( uint32_t x, int8_t r )
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     return (x << r) | (x >> (32 - r));
 }
@@ -24,6 +30,7 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
     //----------
     // body
+<<<<<<< HEAD
     const uint8_t* blocks = vDataToHash.data();
 
     for (int i = 0; i < nblocks; ++i) {
@@ -36,10 +43,26 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
         h1 ^= k1;
         h1 = ROTL32(h1, 13);
         h1 = h1 * 5 + 0xe6546b64;
+=======
+    const uint32_t * blocks = (const uint32_t *)(&vDataToHash[0] + nblocks*4);
+
+    for(int i = -nblocks; i; i++)
+    {
+        uint32_t k1 = blocks[i];
+
+        k1 *= c1;
+        k1 = ROTL32(k1,15);
+        k1 *= c2;
+
+        h1 ^= k1;
+        h1 = ROTL32(h1,13); 
+        h1 = h1*5+0xe6546b64;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     }
 
     //----------
     // tail
+<<<<<<< HEAD
     const uint8_t* tail = vDataToHash.data() + nblocks * 4;
 
     uint32_t k1 = 0;
@@ -56,6 +79,19 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
             k1 *= c2;
             h1 ^= k1;
     }
+=======
+    const uint8_t * tail = (const uint8_t*)(&vDataToHash[0] + nblocks*4);
+
+    uint32_t k1 = 0;
+
+    switch(vDataToHash.size() & 3)
+    {
+    case 3: k1 ^= tail[2] << 16;
+    case 2: k1 ^= tail[1] << 8;
+    case 1: k1 ^= tail[0];
+            k1 *= c1; k1 = ROTL32(k1,15); k1 *= c2; h1 ^= k1;
+    };
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     //----------
     // finalization
@@ -68,6 +104,7 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
     return h1;
 }
+<<<<<<< HEAD
 
 void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64])
 {
@@ -246,3 +283,5 @@ uint64_t SipHashUint256Extra(uint64_t k0, uint64_t k1, const uint256& val, uint3
     SIPROUND;
     return v0 ^ v1 ^ v2 ^ v3;
 }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

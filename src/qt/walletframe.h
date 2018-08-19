@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -32,12 +33,36 @@ class WalletFrame : public QFrame
 
 public:
     explicit WalletFrame(const PlatformStyle *platformStyle, WiFicoinGUI *_gui = 0);
+=======
+/*
+ * Qt4 bitcoin GUI.
+ *
+ * W.J. van der Laan 2011-2012
+ * The Bitcoin Developers 2011-2013
+ */
+#ifndef WALLETFRAME_H
+#define WALLETFRAME_H
+
+#include <QFrame>
+
+class BitcoinGUI;
+class ClientModel;
+class WalletModel;
+class WalletStack;
+
+class WalletFrame : public QFrame
+{
+    Q_OBJECT
+public:
+    explicit WalletFrame(BitcoinGUI *_gui);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
 
     bool addWallet(const QString& name, WalletModel *walletModel);
     bool setCurrentWallet(const QString& name);
+<<<<<<< HEAD
     bool removeWallet(const QString &name);
     void removeAllWallets();
 
@@ -62,10 +87,30 @@ private:
     WalletView *currentWalletView();
 
 public Q_SLOTS:
+=======
+
+    void removeAllWallets();
+
+    bool handleURI(const QString &uri);
+
+    void showOutOfSyncWarning(bool fShow);
+
+private:
+    BitcoinGUI *gui;
+    ClientModel *clientModel;
+    WalletStack *walletStack;
+
+public slots:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     /** Switch to overview (home) page */
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+<<<<<<< HEAD
+=======
+    /** Switch to address book page */
+    void gotoAddressBookPage();
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
@@ -85,6 +130,7 @@ public Q_SLOTS:
     /** Ask for passphrase to unlock wallet temporarily */
     void unlockWallet();
 
+<<<<<<< HEAD
     /** Show used sending addresses */
     void usedSendingAddresses();
     /** Show used receiving addresses */
@@ -94,3 +140,13 @@ public Q_SLOTS:
 };
 
 #endif // WIFICOIN_QT_WALLETFRAME_H
+=======
+    /** Set the encryption status as shown in the UI.
+     @param[in] status            current encryption status
+     @see WalletModel::EncryptionStatus
+     */
+    void setEncryptionStatus();
+};
+
+#endif // WALLETFRAME_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

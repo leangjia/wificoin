@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -29,6 +30,19 @@ class COutput;
 class CPubKey;
 class CWallet;
 class uint256;
+=======
+#ifndef WALLETMODEL_H
+#define WALLETMODEL_H
+
+#include <QObject>
+
+#include "allocators.h" /* for SecureString */
+
+class OptionsModel;
+class AddressTableModel;
+class TransactionTableModel;
+class CWallet;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 QT_BEGIN_NAMESPACE
 class QTimer;
@@ -37,6 +51,7 @@ QT_END_NAMESPACE
 class SendCoinsRecipient
 {
 public:
+<<<<<<< HEAD
     explicit SendCoinsRecipient() : amount(0), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) { }
     explicit SendCoinsRecipient(const QString &addr, const QString &_label, const CAmount& _amount, const QString &_message):
         address(addr), label(_label), amount(_amount), message(_message), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
@@ -95,12 +110,24 @@ public:
 };
 
 /** Interface to WiFicoin wallet from Qt view code. */
+=======
+    QString address;
+    QString label;
+    qint64 amount;
+};
+
+/** Interface to Bitcoin wallet from Qt view code. */
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 class WalletModel : public QObject
 {
     Q_OBJECT
 
 public:
+<<<<<<< HEAD
     explicit WalletModel(const PlatformStyle *platformStyle, CWallet *wallet, OptionsModel *optionsModel, QObject *parent = 0);
+=======
+    explicit WalletModel(CWallet *wallet, OptionsModel *optionsModel, QObject *parent = 0);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     ~WalletModel();
 
     enum StatusCode // Returned by sendCoins
@@ -113,8 +140,12 @@ public:
         DuplicateAddress,
         TransactionCreationFailed, // Error returned when wallet is still locked
         TransactionCommitFailed,
+<<<<<<< HEAD
         AbsurdFee,
         PaymentRequestExpired
+=======
+        Aborted
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     };
 
     enum EncryptionStatus
@@ -127,6 +158,7 @@ public:
     OptionsModel *getOptionsModel();
     AddressTableModel *getAddressTableModel();
     TransactionTableModel *getTransactionTableModel();
+<<<<<<< HEAD
     RecentRequestsTableModel *getRecentRequestsTableModel();
 
     CAmount getBalance(const CCoinControl *coinControl = nullptr) const;
@@ -136,6 +168,13 @@ public:
     CAmount getWatchBalance() const;
     CAmount getWatchUnconfirmedBalance() const;
     CAmount getWatchImmatureBalance() const;
+=======
+
+    qint64 getBalance() const;
+    qint64 getUnconfirmedBalance() const;
+    qint64 getImmatureBalance() const;
+    int getNumTransactions() const;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     EncryptionStatus getEncryptionStatus() const;
 
     // Check address for validity
@@ -144,6 +183,7 @@ public:
     // Return status record for SendCoins, contains error id + information
     struct SendCoinsReturn
     {
+<<<<<<< HEAD
         SendCoinsReturn(StatusCode _status = OK, QString _reasonCommitFailed = "")
             : status(_status),
               reasonCommitFailed(_reasonCommitFailed)
@@ -158,6 +198,19 @@ public:
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction &transaction);
+=======
+        SendCoinsReturn(StatusCode status,
+                         qint64 fee=0,
+                         QString hex=QString()):
+            status(status), fee(fee), hex(hex) {}
+        StatusCode status;
+        qint64 fee; // is used in case status is "AmountWithFeeExceedsBalance"
+        QString hex; // is filled with the transaction hash if status is "OK"
+    };
+
+    // Send coins to a list of recipients
+    SendCoinsReturn sendCoins(const QList<SendCoinsRecipient> &recipients);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     // Wallet encryption
     bool setWalletEncrypted(bool encrypted, const SecureString &passphrase);
@@ -189,6 +242,7 @@ public:
 
     UnlockContext requestUnlock();
 
+<<<<<<< HEAD
     bool getPubKey(const CKeyID &address, CPubKey& vchPubKeyOut) const;
     bool IsSpendable(const CTxDestination& dest) const;
     bool getPrivKey(const CKeyID &address, CKey& vchPrivKeyOut) const;
@@ -222,6 +276,10 @@ private:
     CWallet *wallet;
     bool fHaveWatchOnly;
     bool fForceCheckBalanceChanged;
+=======
+private:
+    CWallet *wallet;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     // Wallet has an options model for wallet-specific options
     // (transaction fee, for example)
@@ -229,6 +287,7 @@ private:
 
     AddressTableModel *addressTableModel;
     TransactionTableModel *transactionTableModel;
+<<<<<<< HEAD
     RecentRequestsTableModel *recentRequestsTableModel;
 
     // Cache some values to be able to detect changes
@@ -238,6 +297,14 @@ private:
     CAmount cachedWatchOnlyBalance;
     CAmount cachedWatchUnconfBalance;
     CAmount cachedWatchImmatureBalance;
+=======
+
+    // Cache some values to be able to detect changes
+    qint64 cachedBalance;
+    qint64 cachedUnconfirmedBalance;
+    qint64 cachedImmatureBalance;
+    qint64 cachedNumTransactions;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     EncryptionStatus cachedEncryptionStatus;
     int cachedNumBlocks;
 
@@ -247,10 +314,19 @@ private:
     void unsubscribeFromCoreSignals();
     void checkBalanceChanged();
 
+<<<<<<< HEAD
 Q_SIGNALS:
     // Signal that balance in wallet changed
     void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
                         const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+=======
+signals:
+    // Signal that balance in wallet changed
+    void balanceChanged(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance);
+
+    // Number of transactions in wallet changed
+    void numTransactionsChanged(int count);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     // Encryption status of wallet changed
     void encryptionStatusChanged(int status);
@@ -260,6 +336,7 @@ Q_SIGNALS:
     // this means that the unlocking failed or was cancelled.
     void requireUnlock();
 
+<<<<<<< HEAD
     // Fired when a message should be reported to the user
     void message(const QString &title, const QString &message, unsigned int style);
 
@@ -281,8 +358,24 @@ public Q_SLOTS:
     void updateAddressBook(const QString &address, const QString &label, bool isMine, const QString &purpose, int status);
     /* Watch-only added */
     void updateWatchOnlyFlag(bool fHaveWatchonly);
+=======
+    // Asynchronous message notification
+    void message(const QString &title, const QString &message, unsigned int style);
+
+public slots:
+    /* Wallet status might have changed */
+    void updateStatus();
+    /* New transaction, or transaction changed status */
+    void updateTransaction(const QString &hash, int status);
+    /* New, updated or removed address book entry */
+    void updateAddressBook(const QString &address, const QString &label, bool isMine, int status);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     /* Current, immature or unconfirmed balance might have changed - emit 'balanceChanged' if so */
     void pollBalanceChanged();
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_WALLETMODEL_H
+=======
+#endif // WALLETMODEL_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

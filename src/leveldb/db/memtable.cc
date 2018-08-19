@@ -101,7 +101,11 @@ void MemTable::Add(SequenceNumber s, ValueType type,
   p += 8;
   p = EncodeVarint32(p, val_size);
   memcpy(p, value.data(), val_size);
+<<<<<<< HEAD
   assert(p + val_size == buf + encoded_len);
+=======
+  assert((p + val_size) - buf == encoded_len);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   table_.Insert(buf);
 }
 

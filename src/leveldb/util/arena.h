@@ -5,11 +5,18 @@
 #ifndef STORAGE_LEVELDB_UTIL_ARENA_H_
 #define STORAGE_LEVELDB_UTIL_ARENA_H_
 
+<<<<<<< HEAD
 #include <vector>
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
 #include "port/port.h"
+=======
+#include <cstddef>
+#include <vector>
+#include <assert.h>
+#include <stdint.h>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 namespace leveldb {
 
@@ -25,9 +32,16 @@ class Arena {
   char* AllocateAligned(size_t bytes);
 
   // Returns an estimate of the total memory usage of data allocated
+<<<<<<< HEAD
   // by the arena.
   size_t MemoryUsage() const {
     return reinterpret_cast<uintptr_t>(memory_usage_.NoBarrier_Load());
+=======
+  // by the arena (including space allocated but not yet used for user
+  // allocations).
+  size_t MemoryUsage() const {
+    return blocks_memory_ + blocks_.capacity() * sizeof(char*);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
  private:
@@ -41,8 +55,13 @@ class Arena {
   // Array of new[] allocated memory blocks
   std::vector<char*> blocks_;
 
+<<<<<<< HEAD
   // Total memory usage of the arena.
   port::AtomicPointer memory_usage_;
+=======
+  // Bytes of memory in blocks allocated so far
+  size_t blocks_memory_;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
   // No copying allowed
   Arena(const Arena&);

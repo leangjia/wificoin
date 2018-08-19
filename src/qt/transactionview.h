@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -23,6 +24,24 @@ class QMenu;
 class QModelIndex;
 class QSignalMapper;
 class QTableView;
+=======
+#ifndef TRANSACTIONVIEW_H
+#define TRANSACTIONVIEW_H
+
+#include <QWidget>
+
+class WalletModel;
+class TransactionFilterProxy;
+
+QT_BEGIN_NAMESPACE
+class QTableView;
+class QComboBox;
+class QLineEdit;
+class QModelIndex;
+class QMenu;
+class QFrame;
+class QDateTimeEdit;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 QT_END_NAMESPACE
 
 /** Widget showing the transaction list for a wallet, including a filter row.
@@ -33,7 +52,11 @@ class TransactionView : public QWidget
     Q_OBJECT
 
 public:
+<<<<<<< HEAD
     explicit TransactionView(const PlatformStyle *platformStyle, QWidget *parent = 0);
+=======
+    explicit TransactionView(QWidget *parent = 0);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     void setModel(WalletModel *model);
 
@@ -49,6 +72,7 @@ public:
         Range
     };
 
+<<<<<<< HEAD
     enum ColumnWidths {
         STATUS_COLUMN_WIDTH = 30,
         WATCHONLY_COLUMN_WIDTH = 23,
@@ -58,6 +82,8 @@ public:
         MINIMUM_COLUMN_WIDTH = 23
     };
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 private:
     WalletModel *model;
     TransactionFilterProxy *transactionProxyModel;
@@ -65,16 +91,23 @@ private:
 
     QComboBox *dateWidget;
     QComboBox *typeWidget;
+<<<<<<< HEAD
     QComboBox *watchOnlyWidget;
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     QLineEdit *addressWidget;
     QLineEdit *amountWidget;
 
     QMenu *contextMenu;
+<<<<<<< HEAD
     QSignalMapper *mapperThirdPartyTxUrls;
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     QFrame *dateRangeWidget;
     QDateTimeEdit *dateFrom;
     QDateTimeEdit *dateTo;
+<<<<<<< HEAD
     QAction *abandonAction;
     QAction *bumpFeeAction;
 
@@ -87,6 +120,12 @@ private:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private Q_SLOTS:
+=======
+
+    QWidget *createDateRangeWidget();
+
+private slots:
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     void contextualMenu(const QPoint &);
     void dateRangeChanged();
     void showDetails();
@@ -95,6 +134,7 @@ private Q_SLOTS:
     void copyLabel();
     void copyAmount();
     void copyTxID();
+<<<<<<< HEAD
     void copyTxHex();
     void copyTxPlainText();
     void openThirdPartyTxUrl(QString url);
@@ -114,9 +154,24 @@ public Q_SLOTS:
     void chooseWatchonly(int idx);
     void changedAmount();
     void changedPrefix();
+=======
+
+signals:
+    void doubleClicked(const QModelIndex&);
+
+public slots:
+    void chooseDate(int idx);
+    void chooseType(int idx);
+    void changedPrefix(const QString &prefix);
+    void changedAmount(const QString &amount);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     void exportClicked();
     void focusTransaction(const QModelIndex&);
 
 };
 
+<<<<<<< HEAD
 #endif // WIFICOIN_QT_TRANSACTIONVIEW_H
+=======
+#endif // TRANSACTIONVIEW_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

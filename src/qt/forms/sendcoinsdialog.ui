@@ -6,13 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>850</width>
     <height>526</height>
+=======
+    <width>686</width>
+    <height>217</height>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
    </rect>
   </property>
   <property name="windowTitle">
    <string>Send Coins</string>
   </property>
+<<<<<<< HEAD
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0,0">
    <property name="bottomMargin">
     <number>8</number>
@@ -577,6 +583,9 @@
      </layout>
     </widget>
    </item>
+=======
+  <layout class="QVBoxLayout" name="verticalLayout">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
    <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
@@ -587,6 +596,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
+<<<<<<< HEAD
         <width>830</width>
         <height>104</height>
        </rect>
@@ -602,6 +612,14 @@
         <number>0</number>
        </property>
        <property name="bottomMargin">
+=======
+        <width>666</width>
+        <height>165</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="margin">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         <number>0</number>
        </property>
        <item>
@@ -629,6 +647,7 @@
     </widget>
    </item>
    <item>
+<<<<<<< HEAD
     <widget class="QFrame" name="frameFee">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1155,13 +1174,30 @@
        <property name="icon">
         <iconset resource="../wificoin.qrc">
          <normaloff>:/icons/send</normaloff>:/icons/send</iconset>
+=======
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="addButton">
+       <property name="toolTip">
+        <string>Send to multiple recipients at once</string>
+       </property>
+       <property name="text">
+        <string>Add &amp;Recipient</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
+<<<<<<< HEAD
        <property name="default">
         <bool>false</bool>
        </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
       </widget>
      </item>
      <item>
@@ -1173,12 +1209,17 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
+<<<<<<< HEAD
         <string>Clear all fields of the form.</string>
+=======
+        <string>Remove all transaction fields</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
        <property name="text">
         <string>Clear &amp;All</string>
        </property>
        <property name="icon">
+<<<<<<< HEAD
         <iconset resource="../wificoin.qrc">
          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
        </property>
@@ -1198,12 +1239,86 @@
        <property name="icon">
         <iconset resource="../wificoin.qrc">
          <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+=======
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+       </property>
+       <property name="autoRepeatDelay">
+        <number>300</number>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
       </widget>
      </item>
+     <item>
+<<<<<<< HEAD
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label">
+<<<<<<< HEAD
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
+         <property name="text">
+          <string>Balance:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelBalance">
+<<<<<<< HEAD
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="text">
+<<<<<<< HEAD
+          <string notr="true">123.456 WFC</string>
+=======
+          <string>123.456 LGBT</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+<<<<<<< HEAD
+=======
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -1218,48 +1333,34 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="spacing">
-        <number>3</number>
+      <widget class="QPushButton" name="sendButton">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
        </property>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Balance:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="labelBalance">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string notr="true">123.456 WFC</string>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
+       <property name="toolTip">
+        <string>Confirm the send action</string>
+       </property>
+       <property name="text">
+        <string>S&amp;end</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bitcoin.qrc">
+         <normaloff>:/icons/send</normaloff>:/icons/send</iconset>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </layout>
    </item>
   </layout>
  </widget>
+<<<<<<< HEAD
  <customwidgets>
   <customwidget>
    <class>QValidatedLineEdit</class>
@@ -1280,4 +1381,10 @@
  <buttongroups>
   <buttongroup name="groupFee"/>
  </buttongroups>
+=======
+ <resources>
+  <include location="../bitcoin.qrc"/>
+ </resources>
+ <connections/>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 </ui>

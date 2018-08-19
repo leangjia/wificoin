@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>598</width>
+<<<<<<< HEAD
     <height>222</height>
+=======
+    <height>198</height>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,6 +30,7 @@
    <string>Passphrase Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+<<<<<<< HEAD
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
@@ -34,6 +39,10 @@
      <property name="text">
       <string notr="true">Placeholder text</string>
      </property>
+=======
+   <item>
+    <widget class="QLabel" name="warningLabel">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      <property name="textFormat">
       <enum>Qt::RichText</enum>
      </property>
@@ -44,9 +53,12 @@
    </item>
    <item>
     <layout class="QFormLayout" name="formLayout">
+<<<<<<< HEAD
      <property name="sizeConstraint">
       <enum>QLayout::SetMinimumSize</enum>
      </property>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
      </property>
@@ -131,12 +143,21 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>
@@ -147,12 +168,21 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>

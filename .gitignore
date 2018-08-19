@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.tar.gz
 
 *.exe
@@ -50,11 +51,18 @@ src/tags
 .deps
 .dirstamp
 .libs
+=======
+src/*.exe
+src/bitcoin
+src/bitcoind
+src/test_bitcoin
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 .*.swp
 *.*~*
 *.bak
 *.rej
 *.orig
+<<<<<<< HEAD
 *.pyc
 *.o
 *.o-*
@@ -73,24 +81,45 @@ src/tags
 #libtool object files
 *.lo
 *.la
+=======
+*.o
+*.patch
+.bitcoin
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
+<<<<<<< HEAD
 wificoin-qt
 WiFicoin-Qt.app
 
 # Unit-tests
 Makefile.test
 wificoin-qt_test
+=======
+bitcoin-qt
+Bitcoin-Qt.app
+
+# Unit-tests
+Makefile.test
+bitcoin-qt_test
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 # Resources cpp
 qrc_*.cpp
 
+<<<<<<< HEAD
+=======
+# Qt creator
+*.pro.user
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 # Mac specific
 .DS_Store
 build
 
+<<<<<<< HEAD
 #lcov
 *.gcno
 *.gcda
@@ -113,3 +142,6 @@ test/cache/*
 libwificoinconsensus.pc
 contrib/devtools/split-debug.sh
 
+=======
+!src/leveldb-*/Makefile
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

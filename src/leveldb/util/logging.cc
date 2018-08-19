@@ -45,11 +45,27 @@ std::string EscapeString(const Slice& value) {
   return r;
 }
 
+<<<<<<< HEAD
+=======
+bool ConsumeChar(Slice* in, char c) {
+  if (!in->empty() && (*in)[0] == c) {
+    in->remove_prefix(1);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 bool ConsumeDecimalNumber(Slice* in, uint64_t* val) {
   uint64_t v = 0;
   int digits = 0;
   while (!in->empty()) {
+<<<<<<< HEAD
     unsigned char c = (*in)[0];
+=======
+    char c = (*in)[0];
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (c >= '0' && c <= '9') {
       ++digits;
       const int delta = (c - '0');

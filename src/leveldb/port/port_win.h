@@ -168,9 +168,12 @@ inline bool GetHeapProfile(void (*func)(void*, const char*, int), void* arg) {
   return false;
 }
 
+<<<<<<< HEAD
 bool HasAcceleratedCRC32C();
 uint32_t AcceleratedCRC32C(uint32_t crc, const char* buf, size_t size);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 }
 

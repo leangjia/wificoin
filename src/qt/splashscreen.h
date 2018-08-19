@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -18,10 +19,21 @@ class NetworkStyle;
  * moved around and minimized has turned out to be frustrating to the user.
  */
 class SplashScreen : public QWidget
+=======
+#ifndef SPLASHSCREEN_H
+#define SPLASHSCREEN_H
+
+#include <QSplashScreen>
+
+/** class for the splashscreen with information of the running client
+ */
+class SplashScreen : public QSplashScreen
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     Q_OBJECT
 
 public:
+<<<<<<< HEAD
     explicit SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle);
     ~SplashScreen();
 
@@ -60,3 +72,9 @@ private:
 };
 
 #endif // WIFICOIN_QT_SPLASHSCREEN_H
+=======
+    explicit SplashScreen(const QPixmap &pixmap = QPixmap(), Qt::WindowFlags f = 0);
+};
+
+#endif // SPLASHSCREEN_H
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1

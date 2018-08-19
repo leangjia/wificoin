@@ -41,7 +41,11 @@ Status Table::Open(const Options& options,
                    Table** table) {
   *table = NULL;
   if (size < Footer::kEncodedLength) {
+<<<<<<< HEAD
     return Status::Corruption("file is too short to be an sstable");
+=======
+    return Status::InvalidArgument("file is too short to be an sstable");
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
   char footer_space[Footer::kEncodedLength];
@@ -58,11 +62,15 @@ Status Table::Open(const Options& options,
   BlockContents contents;
   Block* index_block = NULL;
   if (s.ok()) {
+<<<<<<< HEAD
     ReadOptions opt;
     if (options.paranoid_checks) {
       opt.verify_checksums = true;
     }
     s = ReadBlock(file, opt, footer.index_handle(), &contents);
+=======
+    s = ReadBlock(file, ReadOptions(), footer.index_handle(), &contents);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (s.ok()) {
       index_block = new Block(contents);
     }
@@ -82,7 +90,11 @@ Status Table::Open(const Options& options,
     *table = new Table(rep);
     (*table)->ReadMeta(footer);
   } else {
+<<<<<<< HEAD
     delete index_block;
+=======
+    if (index_block) delete index_block;
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   }
 
   return s;
@@ -96,9 +108,12 @@ void Table::ReadMeta(const Footer& footer) {
   // TODO(sanjay): Skip this if footer.metaindex_handle() size indicates
   // it is an empty block.
   ReadOptions opt;
+<<<<<<< HEAD
   if (rep_->options.paranoid_checks) {
     opt.verify_checksums = true;
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   BlockContents contents;
   if (!ReadBlock(rep_->file, opt, footer.metaindex_handle(), &contents).ok()) {
     // Do not propagate errors since meta info is not needed for operation
@@ -127,9 +142,12 @@ void Table::ReadFilter(const Slice& filter_handle_value) {
   // We might want to unify with ReadBlock() if we start
   // requiring checksum verification in Table::Open.
   ReadOptions opt;
+<<<<<<< HEAD
   if (rep_->options.paranoid_checks) {
     opt.verify_checksums = true;
   }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
   BlockContents block;
   if (!ReadBlock(rep_->file, opt, filter_handle, &block).ok()) {
     return;

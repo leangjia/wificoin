@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2016 The WiFicoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -17,6 +18,33 @@
 #include "script/script.h"
 #include "script/standard.h"
 #include "util.h"
+=======
+#include <QApplication>
+
+#include "guiutil.h"
+
+#include "bitcoinaddressvalidator.h"
+#include "walletmodel.h"
+#include "bitcoinunits.h"
+
+#include "util.h"
+#include "init.h"
+
+#include <QDateTime>
+#include <QDoubleValidator>
+#include <QFont>
+#include <QLineEdit>
+#include <QUrl>
+#include <QTextDocument> // For Qt::escape
+#include <QAbstractItemView>
+#include <QClipboard>
+#include <QFileDialog>
+#include <QDesktopServices>
+#include <QThread>
+
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 #ifdef WIN32
 #ifdef _WIN32_WINNT
@@ -31,6 +59,7 @@
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
+<<<<<<< HEAD
 #include "shellapi.h"
 #include "shlobj.h"
 #include "shlwapi.h"
@@ -73,6 +102,11 @@ extern double NSAppKitVersionNumber;
 #if !defined(NSAppKitVersionNumber10_9)
 #define NSAppKitVersionNumber10_9 1265
 #endif
+=======
+#include "shlwapi.h"
+#include "shlobj.h"
+#include "shellapi.h"
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #endif
 
 namespace GUIUtil {
@@ -87,6 +121,7 @@ QString dateTimeStr(qint64 nTime)
     return dateTimeStr(QDateTime::fromTime_t((qint32)nTime));
 }
 
+<<<<<<< HEAD
 QFont fixedPitchFont()
 {
 #if QT_VERSION >= 0x50200
@@ -132,6 +167,20 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #endif
     widget->setValidator(new WiFicoinAddressEntryValidator(parent));
     widget->setCheckValidator(new WiFicoinAddressCheckValidator(parent));
+=======
+QFont bitcoinAddressFont()
+{
+    QFont font("Monospace");
+    font.setStyleHint(QFont::TypeWriter);
+    return font;
+}
+
+void setupAddressWidget(QLineEdit *widget, QWidget *parent)
+{
+    widget->setMaxLength(BitcoinAddressValidator::MaxAddressLength);
+    widget->setValidator(new BitcoinAddressValidator(parent));
+    widget->setFont(bitcoinAddressFont());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -143,14 +192,22 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
+<<<<<<< HEAD
 bool parseWiFicoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no wificoin: URI
     if(!uri.isValid() || uri.scheme() != QString("wificoin"))
+=======
+bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
+{
+    // return if URI is not valid or is no bitcoin URI
+    if(!uri.isValid() || uri.scheme() != QString("rainbowcoin"))
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         return false;
 
     SendCoinsRecipient rv;
     rv.address = uri.path();
+<<<<<<< HEAD
     // Trim any following forward slash which may have been added by the OS
     if (rv.address.endsWith("/")) {
         rv.address.truncate(rv.address.length() - 1);
@@ -163,6 +220,10 @@ bool parseWiFicoinURI(const QUrl &uri, SendCoinsRecipient *out)
     QUrlQuery uriQuery(uri);
     QList<QPair<QString, QString> > items = uriQuery.queryItems();
 #endif
+=======
+    rv.amount = 0;
+    QList<QPair<QString, QString> > items = uri.queryItems();
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
     {
         bool fShouldReturnFalse = false;
@@ -177,16 +238,23 @@ bool parseWiFicoinURI(const QUrl &uri, SendCoinsRecipient *out)
             rv.label = i->second;
             fShouldReturnFalse = false;
         }
+<<<<<<< HEAD
         if (i->first == "message")
         {
             rv.message = i->second;
             fShouldReturnFalse = false;
         }
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         else if (i->first == "amount")
         {
             if(!i->second.isEmpty())
             {
+<<<<<<< HEAD
                 if(!WiFicoinUnits::parse(WiFicoinUnits::WFC, i->second, &rv.amount))
+=======
+                if(!BitcoinUnits::parse(BitcoinUnits::BTC, i->second, &rv.amount))
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
                 {
                     return false;
                 }
@@ -204,6 +272,7 @@ bool parseWiFicoinURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
+<<<<<<< HEAD
 bool parseWiFicoinURI(QString uri, SendCoinsRecipient *out)
 {
     // Convert wificoin:// to wificoin:
@@ -252,15 +321,33 @@ bool isDust(const QString& address, const CAmount& amount)
     CScript script = GetScriptForDestination(dest);
     CTxOut txOut(amount, script);
     return IsDust(txOut, ::dustRelayFee);
+=======
+bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
+{
+    // Convert bitcoin:// to bitcoin:
+    //
+    //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
+    //    which will lower-case it (and thus invalidate the address).
+    if(uri.startsWith("rainbowcoin://"))
+    {
+        uri.replace(0, std::string("rainbowcoin://").length(), "rainbowcoin:");
+    }
+    QUrl uriInstance(uri);
+    return parseBitcoinURI(uriInstance, out);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
 {
+<<<<<<< HEAD
 #if QT_VERSION < 0x050000
     QString escaped = Qt::escape(str);
 #else
     QString escaped = str.toHtmlEscaped();
 #endif
+=======
+    QString escaped = Qt::escape(str);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if(fMultiLine)
     {
         escaped = escaped.replace("\n", "<br>\n");
@@ -281,6 +368,7 @@ void copyEntryData(QAbstractItemView *view, int column, int role)
 
     if(!selection.isEmpty())
     {
+<<<<<<< HEAD
         // Copy first item
         setClipboard(selection.at(0).data(role).toString());
     }
@@ -296,23 +384,44 @@ QList<QModelIndex> getEntryData(QAbstractItemView *view, int column)
 QString getSaveFileName(QWidget *parent, const QString &caption, const QString &dir,
     const QString &filter,
     QString *selectedSuffixOut)
+=======
+        // Copy first item (global clipboard)
+        QApplication::clipboard()->setText(selection.at(0).data(role).toString(), QClipboard::Clipboard);
+        // Copy first item (global mouse selection for e.g. X11 - NOP on Windows)
+        QApplication::clipboard()->setText(selection.at(0).data(role).toString(), QClipboard::Selection);
+    }
+}
+
+QString getSaveFileName(QWidget *parent, const QString &caption,
+                                 const QString &dir,
+                                 const QString &filter,
+                                 QString *selectedSuffixOut)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
     QString selectedFilter;
     QString myDir;
     if(dir.isEmpty()) // Default to user documents location
     {
+<<<<<<< HEAD
 #if QT_VERSION < 0x050000
         myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
 #else
         myDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
 #endif
+=======
+        myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     }
     else
     {
         myDir = dir;
     }
+<<<<<<< HEAD
     /* Directly convert path to native OS path separators */
     QString result = QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, myDir, filter, &selectedFilter));
+=======
+    QString result = QFileDialog::getSaveFileName(parent, caption, myDir, filter, &selectedFilter);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
     /* Extract first suffix from filter pattern "Description (*.foo)" or "Description (*.foo *.bar ...) */
     QRegExp filter_re(".* \\(\\*\\.(.*)[ \\)]");
@@ -343,6 +452,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption, const QString &
     return result;
 }
 
+<<<<<<< HEAD
 QString getOpenFileName(QWidget *parent, const QString &caption, const QString &dir,
     const QString &filter,
     QString *selectedSuffixOut)
@@ -378,6 +488,8 @@ QString getOpenFileName(QWidget *parent, const QString &caption, const QString &
     return result;
 }
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 Qt::ConnectionType blockingGUIThreadConnection()
 {
     if(QThread::currentThread() != qApp->thread())
@@ -408,6 +520,7 @@ bool isObscured(QWidget *w)
 
 void openDebugLogfile()
 {
+<<<<<<< HEAD
     fs::path pathDebug = GetDataDir() / "debug.log";
 
     /* Open debug.log with the associated application */
@@ -470,6 +583,17 @@ void SubstituteFonts(const QString& language)
 ToolTipToRichTextFilter::ToolTipToRichTextFilter(int _size_threshold, QObject *parent) :
     QObject(parent),
     size_threshold(_size_threshold)
+=======
+    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
+
+    /* Open debug.log with the associated application */
+    if (boost::filesystem::exists(pathDebug))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(pathDebug.string())));
+}
+
+ToolTipToRichTextFilter::ToolTipToRichTextFilter(int size_threshold, QObject *parent) :
+    QObject(parent), size_threshold(size_threshold)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 {
 
 }
@@ -480,11 +604,19 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     {
         QWidget *widget = static_cast<QWidget*>(obj);
         QString tooltip = widget->toolTip();
+<<<<<<< HEAD
         if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt") && !Qt::mightBeRichText(tooltip))
         {
             // Envelop with <qt></qt> to make sure Qt detects this as rich text
             // Escape the current message as HTML and replace \n by <br>
             tooltip = "<qt>" + HtmlEscape(tooltip, true) + "</qt>";
+=======
+        if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt/>") && !Qt::mightBeRichText(tooltip))
+        {
+            // Prefix <qt/> to make sure Qt detects this as rich text
+            // Escape the current message as HTML and replace \n by <br>
+            tooltip = "<qt/>" + HtmlEscape(tooltip, true);
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
             widget->setToolTip(tooltip);
             return true;
         }
@@ -492,6 +624,7 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     return QObject::eventFilter(obj, evt);
 }
 
+<<<<<<< HEAD
 void TableViewLastColumnResizingFixer::connectViewHeadersSignals()
 {
     connect(tableView->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(on_sectionResized(int,int,int)));
@@ -619,17 +752,29 @@ fs::path static StartupShortcutPath()
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
         return GetSpecialFolderPath(CSIDL_STARTUP) / "WiFicoin (testnet).lnk";
     return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("WiFicoin (%s).lnk", chain);
+=======
+#ifdef WIN32
+boost::filesystem::path static StartupShortcutPath()
+{
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "rainbowcoin.lnk";
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 bool GetStartOnSystemStartup()
 {
+<<<<<<< HEAD
     // check for WiFicoin*.lnk
     return fs::exists(StartupShortcutPath());
+=======
+    // check for Bitcoin.lnk
+    return boost::filesystem::exists(StartupShortcutPath());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
     // If the shortcut exists already, remove it for updating
+<<<<<<< HEAD
     fs::remove(StartupShortcutPath());
 
     if (fAutoStart)
@@ -641,11 +786,25 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         HRESULT hres = CoCreateInstance(CLSID_ShellLink, nullptr,
             CLSCTX_INPROC_SERVER, IID_IShellLink,
             reinterpret_cast<void**>(&psl));
+=======
+    boost::filesystem::remove(StartupShortcutPath());
+
+    if (fAutoStart)
+    {
+        CoInitialize(NULL);
+
+        // Get a pointer to the IShellLink interface.
+        IShellLink* psl = NULL;
+        HRESULT hres = CoCreateInstance(CLSID_ShellLink, NULL,
+                                CLSCTX_INPROC_SERVER, IID_IShellLink,
+                                reinterpret_cast<void**>(&psl));
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
         if (SUCCEEDED(hres))
         {
             // Get the current executable path
             TCHAR pszExePath[MAX_PATH];
+<<<<<<< HEAD
             GetModuleFileName(nullptr, pszExePath, sizeof(pszExePath));
 
             // Start client minimized
@@ -660,12 +819,18 @@ bool SetStartOnSystemStartup(bool fAutoStart)
             // Add missing '\0'-termination to string
             args[strArgs.length()] = '\0';
 #endif
+=======
+            GetModuleFileName(NULL, pszExePath, sizeof(pszExePath));
+
+            TCHAR pszArgs[5] = TEXT("-min");
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
             // Set the path to the shortcut target
             psl->SetPath(pszExePath);
             PathRemoveFileSpec(pszExePath);
             psl->SetWorkingDirectory(pszExePath);
             psl->SetShowCmd(SW_SHOWMINNOACTIVE);
+<<<<<<< HEAD
 #ifndef UNICODE
             psl->SetArguments(strArgs.toStdString().c_str());
 #else
@@ -676,6 +841,15 @@ bool SetStartOnSystemStartup(bool fAutoStart)
             // saving the shortcut in persistent storage.
             IPersistFile* ppf = nullptr;
             hres = psl->QueryInterface(IID_IPersistFile, reinterpret_cast<void**>(&ppf));
+=======
+            psl->SetArguments(pszArgs);
+
+            // Query IShellLink for the IPersistFile interface for
+            // saving the shortcut in persistent storage.
+            IPersistFile* ppf = NULL;
+            hres = psl->QueryInterface(IID_IPersistFile,
+                                       reinterpret_cast<void**>(&ppf));
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
             if (SUCCEEDED(hres))
             {
                 WCHAR pwsz[MAX_PATH];
@@ -695,6 +869,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     }
     return true;
 }
+<<<<<<< HEAD
 #elif defined(Q_OS_LINUX)
 
 // Follow the Desktop Application Autostart Spec:
@@ -702,6 +877,18 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 
 fs::path static GetAutostartDir()
 {
+=======
+
+#elif defined(LINUX)
+
+// Follow the Desktop Application Autostart Spec:
+//  http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html
+
+boost::filesystem::path static GetAutostartDir()
+{
+    namespace fs = boost::filesystem;
+
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     char* pszConfigHome = getenv("XDG_CONFIG_HOME");
     if (pszConfigHome) return fs::path(pszConfigHome) / "autostart";
     char* pszHome = getenv("HOME");
@@ -709,17 +896,27 @@ fs::path static GetAutostartDir()
     return fs::path();
 }
 
+<<<<<<< HEAD
 fs::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
         return GetAutostartDir() / "wificoin.desktop";
     return GetAutostartDir() / strprintf("wificoin-%s.lnk", chain);
+=======
+boost::filesystem::path static GetAutostartFilePath()
+{
+    return GetAutostartDir() / "rainbowcoin.desktop";
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 bool GetStartOnSystemStartup()
 {
+<<<<<<< HEAD
     fs::ifstream optionFile(GetAutostartFilePath());
+=======
+    boost::filesystem::ifstream optionFile(GetAutostartFilePath());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     if (!optionFile.good())
         return false;
     // Scan through file for "Hidden=true":
@@ -739,7 +936,11 @@ bool GetStartOnSystemStartup()
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
     if (!fAutoStart)
+<<<<<<< HEAD
         fs::remove(GetAutostartFilePath());
+=======
+        boost::filesystem::remove(GetAutostartFilePath());
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     else
     {
         char pszExePath[MAX_PATH+1];
@@ -747,6 +948,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (readlink("/proc/self/exe", pszExePath, sizeof(pszExePath)-1) == -1)
             return false;
 
+<<<<<<< HEAD
         fs::create_directories(GetAutostartDir());
 
         fs::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out|std::ios_base::trunc);
@@ -761,12 +963,25 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         else
             optionFile << strprintf("Name=WiFicoin (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
+=======
+        boost::filesystem::create_directories(GetAutostartDir());
+
+        boost::filesystem::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out|std::ios_base::trunc);
+        if (!optionFile.good())
+            return false;
+        // Write a bitcoin.desktop file to the autostart directory:
+        optionFile << "[Desktop Entry]\n";
+        optionFile << "Type=Application\n";
+        optionFile << "Name=rainbowcoin\n";
+        optionFile << "Exec=" << pszExePath << " -min\n";
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
         optionFile.close();
     }
     return true;
 }
+<<<<<<< HEAD
 
 
 #elif defined(Q_OS_MAC)
@@ -836,12 +1051,19 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 }
 #pragma GCC diagnostic pop
 #else
+=======
+#else
+
+// TODO: OSX startup stuff; see:
+// https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPSystemStartup/Articles/CustomLogin.html
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 
 bool GetStartOnSystemStartup() { return false; }
 bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 
 #endif
 
+<<<<<<< HEAD
 void setClipboard(const QString& str)
 {
     QApplication::clipboard()->setText(str, QClipboard::Clipboard);
@@ -971,6 +1193,46 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent *event)
 void ClickableProgressBar::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_EMIT clicked(event->pos());
+=======
+HelpMessageBox::HelpMessageBox(QWidget *parent) :
+    QMessageBox(parent)
+{
+    header = tr("rainbowcoin-Qt") + " " + tr("version") + " " +
+        QString::fromStdString(FormatFullVersion()) + "\n\n" +
+        tr("Usage:") + "\n" +
+        "  rainbowcoin-qt [" + tr("command-line options") + "]                     " + "\n";
+
+    coreOptions = QString::fromStdString(HelpMessage());
+
+    uiOptions = tr("UI options") + ":\n" +
+        "  -lang=<lang>           " + tr("Set language, for example \"de_DE\" (default: system locale)") + "\n" +
+        "  -min                   " + tr("Start minimized") + "\n" +
+        "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
+
+    setWindowTitle(tr("rainbowcoin-Qt"));
+    setTextFormat(Qt::PlainText);
+    // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
+    setText(header + QString(QChar(0x2003)).repeated(50));
+    setDetailedText(coreOptions + "\n" + uiOptions);
+}
+
+void HelpMessageBox::printToConsole()
+{
+    // On other operating systems, the expected action is to print the message to the console.
+    QString strUsage = header + "\n" + coreOptions + "\n" + uiOptions;
+    fprintf(stdout, "%s", strUsage.toStdString().c_str());
+}
+
+void HelpMessageBox::showOrPrint()
+{
+#if defined(WIN32)
+        // On Windows, show a message box, as there is no stderr/stdout in windowed applications
+        exec();
+#else
+        // On other operating systems, print help text to console
+        printToConsole();
+#endif
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 }
 
 } // namespace GUIUtil

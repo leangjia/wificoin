@@ -32,7 +32,11 @@
      <item row="0" column="1">
       <widget class="QLineEdit" name="labelEdit">
        <property name="toolTip">
+<<<<<<< HEAD
         <string>The label associated with this address list entry</string>
+=======
+        <string>The label associated with this address book entry</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
       </widget>
      </item>
@@ -47,9 +51,15 @@
       </widget>
      </item>
      <item row="1" column="1">
+<<<<<<< HEAD
       <widget class="QValidatedLineEdit" name="addressEdit">
        <property name="toolTip">
         <string>The address associated with this address list entry. This can only be modified for sending addresses.</string>
+=======
+      <widget class="QLineEdit" name="addressEdit">
+       <property name="toolTip">
+        <string>The address associated with this address book entry. This can only be modified for sending addresses.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
        </property>
       </widget>
      </item>
@@ -67,6 +77,7 @@
    </item>
   </layout>
  </widget>
+<<<<<<< HEAD
  <customwidgets>
   <customwidget>
    <class>QValidatedLineEdit</class>
@@ -74,6 +85,8 @@
    <header>qvalidatedlineedit.h</header>
   </customwidget>
  </customwidgets>
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  <resources/>
  <connections>
   <connection>
@@ -83,12 +96,21 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>
@@ -99,12 +121,21 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+=======
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
     </hint>
    </hints>
   </connection>

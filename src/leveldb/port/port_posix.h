@@ -21,11 +21,22 @@
   #else
     #define PLATFORM_IS_LITTLE_ENDIAN false
   #endif
+<<<<<<< HEAD
 #elif defined(OS_FREEBSD) || defined(OS_OPENBSD) ||\
       defined(OS_NETBSD) || defined(OS_DRAGONFLYBSD)
   #include <sys/types.h>
   #include <sys/endian.h>
   #define PLATFORM_IS_LITTLE_ENDIAN (_BYTE_ORDER == _LITTLE_ENDIAN)
+=======
+#elif defined(OS_FREEBSD)
+  #include <sys/types.h>
+  #include <sys/endian.h>
+  #define PLATFORM_IS_LITTLE_ENDIAN (_BYTE_ORDER == _LITTLE_ENDIAN)
+#elif defined(OS_OPENBSD) || defined(OS_NETBSD) ||\
+      defined(OS_DRAGONFLYBSD)
+  #include <sys/types.h>
+  #include <sys/endian.h>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 #elif defined(OS_HPUX)
   #define PLATFORM_IS_LITTLE_ENDIAN false
 #elif defined(OS_ANDROID)
@@ -52,7 +63,11 @@
 
 #if defined(OS_MACOSX) || defined(OS_SOLARIS) || defined(OS_FREEBSD) ||\
     defined(OS_NETBSD) || defined(OS_OPENBSD) || defined(OS_DRAGONFLYBSD) ||\
+<<<<<<< HEAD
     defined(OS_ANDROID) || defined(OS_HPUX) || defined(CYGWIN)
+=======
+    defined(OS_ANDROID) || defined(OS_HPUX)
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 // Use fread/fwrite/fflush on platforms without _unlocked variants
 #define fread_unlocked fread
 #define fwrite_unlocked fwrite
@@ -152,9 +167,12 @@ inline bool GetHeapProfile(void (*func)(void*, const char*, int), void* arg) {
   return false;
 }
 
+<<<<<<< HEAD
 bool HasAcceleratedCRC32C();
 uint32_t AcceleratedCRC32C(uint32_t crc, const char* buf, size_t size);
 
+=======
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
 } // namespace port
 } // namespace leveldb
 

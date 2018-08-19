@@ -30,7 +30,11 @@
        <item>
         <widget class="QLabel" name="infoLabel_SM">
          <property name="text">
+<<<<<<< HEAD
           <string>You can sign messages/agreements with your addresses to prove you can receive wificoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
+=======
+          <string>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -48,20 +52,35 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_SM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The WiFicoin address to sign the message with</string>
+=======
+            <string>The address to sign the message with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
+           </property>
+           <property name="maxLength">
+            <number>34</number>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="addressBookButton_SM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Choose previously used address</string>
+=======
+            <string>Choose an address from the address book</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
            <property name="shortcut">
@@ -81,7 +100,11 @@
             <string/>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
            </property>
            <property name="shortcut">
@@ -137,7 +160,11 @@
             <string/>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/editcopy</normaloff>:/icons/editcopy</iconset>
            </property>
            <property name="autoDefault">
@@ -152,13 +179,21 @@
          <item>
           <widget class="QPushButton" name="signMessageButton_SM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Sign the message to prove you own this WiFicoin address</string>
+=======
+            <string>Sign the message to prove you own this rainbowcoin address</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="text">
             <string>Sign &amp;Message</string>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
            </property>
            <property name="autoDefault">
@@ -175,7 +210,11 @@
             <string>Clear &amp;All</string>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="autoDefault">
@@ -237,7 +276,11 @@
        <item>
         <widget class="QLabel" name="infoLabel_VM">
          <property name="text">
+<<<<<<< HEAD
           <string>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</string>
+=======
+          <string>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -258,20 +301,35 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_VM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The WiFicoin address the message was signed with</string>
+=======
+            <string>The address the message was signed with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
+           </property>
+           <property name="maxLength">
+            <number>34</number>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="addressBookButton_VM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Choose previously used address</string>
+=======
+            <string>Choose an address from the address book</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
            <property name="shortcut">
@@ -295,13 +353,21 @@
          <item>
           <widget class="QPushButton" name="verifyMessageButton_VM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Verify the message to ensure it was signed with the specified WiFicoin address</string>
+=======
+            <string>Verify the message to ensure it was signed with the specified rainbowcoin address</string>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
            </property>
            <property name="text">
             <string>Verify &amp;Message</string>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/transaction_0</normaloff>:/icons/transaction_0</iconset>
            </property>
            <property name="autoDefault">
@@ -318,7 +384,11 @@
             <string>Clear &amp;All</string>
            </property>
            <property name="icon">
+<<<<<<< HEAD
             <iconset resource="../wificoin.qrc">
+=======
+            <iconset resource="../bitcoin.qrc">
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="autoDefault">
@@ -384,7 +454,11 @@
   </customwidget>
  </customwidgets>
  <resources>
+<<<<<<< HEAD
   <include location="../wificoin.qrc"/>
+=======
+  <include location="../bitcoin.qrc"/>
+>>>>>>> 50d0f227934973e5559f2db2f3bb9b69428605a1
  </resources>
  <connections/>
 </ui>
